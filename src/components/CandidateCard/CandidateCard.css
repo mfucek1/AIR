@@ -1,0 +1,142 @@
+/* Candidate card — Figma component set "Candidate card" (Type: Board, List). */
+.air-candidate {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--air-space-12);
+  padding: var(--air-space-16);
+  border: var(--air-stroke-default) solid var(--air-border-subtle);
+  border-radius: var(--air-radius-lg);
+  background: var(--air-bg-surface);
+  color: var(--air-text-primary);
+}
+
+.air-candidate--board {
+  width: 320px;
+  max-width: 100%;
+}
+
+.air-candidate--list {
+  gap: var(--air-space-20);
+  padding: var(--air-space-24);
+}
+
+.air-candidate__title-row,
+.air-candidate__header {
+  display: flex;
+  align-items: center;
+  gap: var(--air-space-8);
+}
+
+.air-candidate__header {
+  flex-wrap: wrap;
+  gap: var(--air-space-16);
+}
+
+.air-candidate__name {
+  flex: 1;
+  margin: 0;
+  font: var(--air-font-title-s);
+  letter-spacing: var(--air-tracking-title-s);
+}
+
+.air-candidate__name--l {
+  flex: none;
+  font: var(--air-font-title-m);
+  letter-spacing: var(--air-tracking-title-m);
+}
+
+/* The name links to the profile; the link covers the whole board card. */
+.air-candidate__name-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.air-candidate--board .air-candidate__name-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--air-radius-lg);
+}
+
+.air-candidate__name-link:hover {
+  color: var(--air-text-link);
+}
+
+.air-candidate__name-link:focus-visible {
+  outline: none;
+}
+
+.air-candidate__name-link:focus-visible::after {
+  box-shadow: var(--air-effect-focus-ring);
+}
+
+.air-candidate--board:has(.air-candidate__name-link:hover) {
+  border-color: var(--air-border-strong);
+}
+
+.air-candidate__who {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--air-space-2);
+  min-width: 200px;
+}
+
+.air-candidate__score {
+  display: flex;
+  align-items: center;
+  gap: var(--air-space-8);
+  padding-top: var(--air-space-2);
+}
+
+.air-candidate__actions {
+  display: flex;
+  gap: var(--air-space-8);
+}
+
+.air-candidate__skills {
+  display: flex;
+  flex-direction: column;
+  gap: var(--air-space-8);
+}
+
+.air-candidate__label {
+  margin: 0;
+  color: var(--air-text-muted);
+  font: var(--air-font-caption);
+}
+
+.air-candidate__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--air-space-8);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.air-candidate__fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--air-space-24);
+  margin: 0;
+}
+
+.air-candidate__fields div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--air-space-2);
+}
+
+.air-candidate__fields dd {
+  margin: 0;
+  font: var(--air-font-body-m);
+}
+
+.air-candidate__summary {
+  margin: 0;
+  color: var(--air-text-secondary);
+  font: var(--air-font-body-m);
+}

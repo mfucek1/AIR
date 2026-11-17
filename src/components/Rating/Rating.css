@@ -1,0 +1,25 @@
+/* Rating — Figma component set "Rating" (Stars). */
+.air-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--air-space-8);
+}
+
+.air-rating__stars {
+  display: inline-flex;
+}
+
+.air-rating__star {
+  fill: var(--air-border-strong);
+}
+
+.air-rating__star--filled {
+  fill: var(--air-rating-star);
+}
+
+.air-rating__value {
+  color: var(--air-text-secondary);
+  font: var(--air-font-caption-strong);
+  letter-spacing: var(--air-tracking-caption-strong);
+  font-variant-numeric: tabular-nums;
+}

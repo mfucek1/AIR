@@ -9,12 +9,14 @@ Design and build by [Marko Fuček](https://markofucek.com). Figma first, built w
 - **Foundations:** colour (primitives and roles), typography, spacing, radius, elevation and focus.
 - **Components:**
   - Actions: Button, Icon button, Link
-  - Forms: Input (with Input action), Textarea, Select, Checkbox, Radio, Switch, Segmented control
+  - Forms: Input (with Input action), Textarea, Select, Checkbox, Radio, Switch, Segmented control, Filter chip, Filter option, Tag input
   - Navigation: Tabs, Menu (with Menu item and Divider)
-  - Feedback: Tooltip, Toast, Banner, Progress, Skeleton
-  - Data display: Badge, Counter, Tag, Avatar, Avatar stack
+  - Feedback: Tooltip, Toast, Banner, Progress, Skeleton, Dialog, Empty state
+  - Data display: Badge, Counter, Tag, Avatar, Avatar stack, Rating
+  - Layout: Section header, Section toggle
+  - AIR: Stage path, Match grade (with the must-haves popover), Citation chip, Criteria evidence row, Flag row, AI block, Decision bar, Candidate card
 
-  AIR's own components (stage path, match grade, evidence rows, candidate card) come next.
+  Still to come: sidebar and top bar, date picker, file upload, money and phone inputs, quick fill, the video pre-screening set, document viewer, rich text editor, audio recorder.
 - **Checks:** every story runs an accessibility check (axe) in the Storybook panel.
 
 ## Tokens: Figma → CSS

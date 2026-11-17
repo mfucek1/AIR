@@ -1,0 +1,133 @@
+/* Filters — Figma component sets "Filter chip", "Filter option" and "Tag input". */
+
+/* Filter chip: 28 px; the chip opens its values, the ✕ removes it. */
+.air-filter-chip {
+  --chip-bg: var(--air-bg-surface);
+  --chip-border: var(--air-border-input);
+
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  border: var(--air-stroke-default) solid var(--chip-border);
+  border-radius: var(--air-radius-sm);
+  background: var(--chip-bg);
+}
+
+.air-filter-chip:hover {
+  --chip-bg: var(--air-bg-hover);
+  --chip-border: var(--air-border-input-hover);
+}
+
+.air-filter-chip--open,
+.air-filter-chip--open:hover {
+  --chip-bg: var(--air-bg-selected);
+  --chip-border: var(--air-border-selected);
+}
+
+.air-filter-chip__main {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--air-space-4);
+  height: 100%;
+  padding: 0 var(--air-space-4) 0 var(--air-space-8);
+  border: none;
+  border-radius: var(--air-radius-sm);
+  background: none;
+  font: var(--air-font-body-s);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.air-filter-chip__main:last-child {
+  padding-right: var(--air-space-8);
+}
+
+.air-filter-chip__key {
+  color: var(--air-text-secondary);
+}
+
+.air-filter-chip__value {
+  color: var(--air-text-primary);
+}
+
+.air-filter-chip__remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin-right: var(--air-space-4);
+  padding: 0;
+  border: none;
+  border-radius: var(--air-radius-xs);
+  background: none;
+  color: var(--air-icon-muted);
+  cursor: pointer;
+}
+
+.air-filter-chip__remove:hover {
+  color: var(--air-icon-default);
+}
+
+.air-filter-chip__main:focus-visible,
+.air-filter-chip__remove:focus-visible {
+  outline: none;
+  box-shadow: var(--air-effect-focus-ring);
+}
+
+/* Filter option */
+.air-filter-option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--air-space-8);
+  margin: 0 calc(-1 * var(--air-space-8));
+  padding: var(--air-space-8);
+  border-radius: var(--air-radius-sm);
+}
+
+.air-filter-option:hover {
+  background: var(--air-bg-hover);
+}
+
+/* The checkbox's label stretches over the row, so the whole row toggles it. */
+.air-filter-option .air-checkbox {
+  position: static;
+  flex: 1;
+}
+
+.air-filter-option .air-checkbox::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.air-filter-option__count {
+  color: var(--air-text-muted);
+  font: var(--air-font-body-s);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Tag input */
+.air-tag-input__box {
+  flex-wrap: wrap;
+  gap: var(--air-space-8);
+  padding: var(--air-space-8);
+}
+
+.air-tag-input__tags {
+  display: contents;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.air-tag-input__tags li {
+  display: inline-flex;
+}
+
+.air-tag-input__control {
+  min-width: 120px;
+  height: 24px;
+}

@@ -1,0 +1,31 @@
+/* Decision bar — Figma component "Decision bar". */
+.air-decision-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--air-space-12);
+  min-height: 64px;
+  padding: var(--air-space-12) var(--air-space-24);
+  border-top: var(--air-stroke-default) solid var(--air-border-subtle);
+  background: var(--air-bg-surface);
+}
+
+.air-decision-bar__text {
+  flex: 1;
+  min-width: 200px;
+}
+
+.air-decision-bar__next,
+.air-decision-bar__hint {
+  margin: 0;
+}
+
+.air-decision-bar__next {
+  color: var(--air-text-primary);
+  font: var(--air-font-body-m-strong);
+}
+
+.air-decision-bar__hint {
+  color: var(--air-text-muted);
+  font: var(--air-font-caption);
+}

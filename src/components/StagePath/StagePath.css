@@ -1,0 +1,142 @@
+/* Stage path — Figma component sets "Stage path" (Status) and "Path step" (State × Shape).
+   A step is a notch, a body and a tip, as in Figma; strokes are drawn inside the shape. */
+.air-stage-path {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--air-space-12);
+}
+
+.air-stage-path__steps {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.air-path-step {
+  --step-fill: var(--air-bg-selected);
+  --step-line: transparent;
+  --step-stroke: 0px;
+  --step-style: solid;
+  --step-text: var(--air-text-link);
+  --step-icon: var(--air-icon-action);
+  --step-font: var(--air-font-caption-strong);
+
+  display: flex;
+  height: 32px;
+}
+
+.air-path-step + .air-path-step {
+  margin-left: var(--air-overlap-6);
+}
+
+.air-path-step__body {
+  display: flex;
+  align-items: center;
+  gap: var(--air-space-4);
+  padding: 0 var(--air-space-8);
+  border: var(--step-stroke) var(--step-style) var(--step-line);
+  border-right: none;
+  border-left: none;
+  background: var(--step-fill);
+  color: var(--step-text);
+  font: var(--step-font);
+  white-space: nowrap;
+}
+
+.air-path-step--start .air-path-step__body {
+  padding-left: var(--air-space-12);
+  border-left: var(--step-stroke) var(--step-style) var(--step-line);
+}
+
+.air-path-step__icon {
+  flex: none;
+  color: var(--step-icon);
+}
+
+.air-path-step__time {
+  font: var(--air-font-caption);
+}
+
+.air-path-step__notch,
+.air-path-step__tip {
+  flex: none;
+  overflow: visible;
+}
+
+.air-path-step__notch {
+  margin-right: -1px;
+}
+
+.air-path-step__tip {
+  margin-left: -1px;
+}
+
+.air-path-step__fill {
+  fill: var(--step-fill);
+}
+
+.air-path-step__line {
+  fill: none;
+  stroke: var(--step-line);
+  stroke-width: calc(var(--step-stroke) * 2);
+}
+
+.air-path-step--current {
+  --step-fill: var(--air-bg-surface);
+  --step-line: var(--air-action-primary);
+  --step-stroke: 2px;
+}
+
+.air-path-step--upcoming {
+  --step-fill: var(--air-bg-sunken);
+  --step-text: var(--air-text-secondary);
+  --step-icon: var(--air-icon-muted);
+  --step-font: var(--air-font-caption);
+}
+
+.air-path-step--skipped {
+  --step-fill: var(--air-bg-surface);
+  --step-line: var(--air-border-strong);
+  --step-stroke: 1px;
+  --step-style: dashed;
+  --step-text: var(--air-text-muted);
+  --step-icon: var(--air-icon-muted);
+  --step-font: var(--air-font-caption);
+}
+
+.air-path-step--skipped .air-path-step__line {
+  stroke-dasharray: 4 3;
+}
+
+.air-path-step--rejected {
+  --step-fill: var(--air-danger-bg);
+  --step-line: var(--air-border-danger);
+  --step-stroke: 1.5px;
+  --step-text: var(--air-danger-text);
+  --step-icon: var(--air-danger-icon);
+}
+
+.air-path-step--withdrawn {
+  --step-fill: var(--air-bg-sunken);
+  --step-line: var(--air-border-strong);
+  --step-stroke: 1.5px;
+  --step-text: var(--air-text-secondary);
+  --step-icon: var(--air-icon-default);
+}
+
+.air-path-step--hired {
+  --step-fill: var(--air-success-solid);
+  --step-text: var(--air-text-on-action);
+  --step-icon: var(--air-icon-inverse);
+}
+
+.air-path-step--not-reached {
+  --step-fill: var(--air-bg-surface);
+  --step-line: var(--air-border-subtle);
+  --step-stroke: 1px;
+  --step-text: var(--air-text-muted);
+  --step-icon: var(--air-icon-muted);
+  --step-font: var(--air-font-caption);
+}

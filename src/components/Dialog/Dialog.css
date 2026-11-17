@@ -1,0 +1,96 @@
+/* Dialog — Figma components "Dialog header" and "Dialog footer" (Size M, S) around a body. */
+.air-dialog {
+  width: 560px;
+  max-width: calc(100vw - 32px);
+  max-height: calc(100vh - 64px);
+  padding: 0;
+  border: var(--air-stroke-default) solid var(--air-border-subtle);
+  border-radius: var(--air-radius-lg);
+  background: var(--air-bg-surface-raised);
+  box-shadow: var(--air-effect-elevation-3);
+  color: var(--air-text-primary);
+}
+
+.air-dialog--s {
+  width: 400px;
+}
+
+.air-dialog::backdrop {
+  background: var(--air-bg-scrim);
+}
+
+.air-dialog[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+.air-dialog__header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--air-space-16);
+  padding: var(--air-space-24) var(--air-space-16) var(--air-space-16) var(--air-space-24);
+}
+
+.air-dialog--s .air-dialog__header {
+  padding: var(--air-space-12) var(--air-space-12) var(--air-space-8) var(--air-space-16);
+}
+
+.air-dialog__heading {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--air-space-4);
+  padding-top: var(--air-space-2);
+}
+
+.air-dialog__title {
+  margin: 0;
+  font: var(--air-font-title-m);
+  letter-spacing: var(--air-tracking-title-m);
+}
+
+.air-dialog--s .air-dialog__title {
+  font: var(--air-font-title-s);
+  letter-spacing: var(--air-tracking-title-s);
+}
+
+.air-dialog__description {
+  margin: 0;
+  color: var(--air-text-secondary);
+  font: var(--air-font-body-m);
+}
+
+.air-dialog--s .air-dialog__description {
+  font: var(--air-font-body-s);
+}
+
+.air-dialog__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 var(--air-space-24) var(--air-space-16);
+  font: var(--air-font-body-m);
+}
+
+.air-dialog--s .air-dialog__body {
+  padding: 0 var(--air-space-16) var(--air-space-8);
+}
+
+.air-dialog__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--air-space-12);
+  padding: var(--air-space-16) var(--air-space-24) var(--air-space-24);
+  border-top: var(--air-stroke-default) solid var(--air-border-subtle);
+}
+
+.air-dialog--s .air-dialog__footer {
+  padding: var(--air-space-8) var(--air-space-16) var(--air-space-16);
+  border-top: none;
+}
+
+.air-dialog__actions {
+  display: flex;
+  gap: var(--air-space-12);
+  margin-left: auto;
+}

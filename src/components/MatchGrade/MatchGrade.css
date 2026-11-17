@@ -1,0 +1,161 @@
+/* Match grade — Figma component sets "Match grade", "Must-haves popover" and "Nice-to-have item". */
+.air-match-grade {
+  --match-bg: var(--air-tag-bg);
+  --match-border: var(--air-border-subtle);
+  --match-border-hover: var(--air-tag-solid);
+  --match-text: var(--air-tag-text);
+  --match-icon: var(--air-icon-muted);
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--air-space-4);
+  padding: var(--air-space-2) var(--air-space-8);
+  border: var(--air-stroke-default) solid var(--match-border);
+  border-radius: var(--air-radius-full);
+  background: var(--match-bg);
+  color: var(--match-text);
+  font: var(--air-font-caption-strong);
+  letter-spacing: var(--air-tracking-caption-strong);
+  white-space: nowrap;
+}
+
+.air-match-grade svg {
+  flex: none;
+  color: var(--match-icon);
+}
+
+.air-match-grade--strong {
+  --match-bg: var(--air-success-bg);
+  --match-border: var(--air-success-border);
+  --match-border-hover: var(--air-success-solid);
+  --match-text: var(--air-success-text);
+  --match-icon: var(--air-success-icon);
+}
+
+.air-match-grade--partial {
+  --match-bg: var(--air-info-bg);
+  --match-border: var(--air-info-border);
+  --match-border-hover: var(--air-info-solid);
+  --match-text: var(--air-info-text);
+  --match-icon: var(--air-icon-action);
+}
+
+button.air-match-grade {
+  cursor: pointer;
+}
+
+button.air-match-grade:hover,
+button.air-match-grade[aria-expanded='true'] {
+  border-color: var(--match-border-hover);
+}
+
+button.air-match-grade:focus-visible {
+  outline: none;
+  box-shadow: var(--air-effect-focus-ring);
+}
+
+.air-match-grade-anchor {
+  position: relative;
+  display: inline-flex;
+}
+
+.air-match-grade__popover {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + var(--air-space-8));
+  left: 0;
+}
+
+/* Popover */
+.air-must-haves {
+  --count: var(--air-info-text);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--air-space-12);
+  width: 360px;
+  max-width: calc(100vw - 32px);
+  padding: var(--air-space-16);
+  border: var(--air-stroke-default) solid var(--air-border-subtle);
+  border-radius: var(--air-radius-md);
+  background: var(--air-bg-surface-raised);
+  box-shadow: var(--air-effect-elevation-2);
+  color: var(--air-text-primary);
+}
+
+.air-must-haves--strong {
+  --count: var(--air-success-text);
+}
+
+.air-must-haves--limited {
+  --count: var(--air-text-secondary);
+}
+
+.air-must-haves__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--air-space-8);
+}
+
+.air-must-haves__title {
+  display: flex;
+  align-items: baseline;
+  gap: var(--air-space-8);
+  margin: 0;
+  font: var(--air-font-body-m-strong);
+}
+
+.air-must-haves__count {
+  color: var(--count);
+  font: var(--air-font-caption-strong);
+}
+
+.air-must-haves__chips,
+.air-must-haves__nice-items {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.air-must-haves__chips {
+  gap: var(--air-space-8);
+}
+
+.air-must-haves__nice {
+  display: flex;
+  flex-direction: column;
+  gap: var(--air-space-8);
+}
+
+.air-must-haves__nice-title {
+  margin: 0;
+  color: var(--air-text-secondary);
+  font: var(--air-font-caption-strong);
+}
+
+.air-must-haves__nice-items {
+  gap: var(--air-space-8) var(--air-space-12);
+}
+
+.air-nice-to-have {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--air-space-4);
+  color: var(--air-text-secondary);
+  font: var(--air-font-caption);
+}
+
+.air-nice-to-have svg {
+  color: var(--air-success-icon);
+}
+
+.air-nice-to-have--missed {
+  color: var(--air-text-muted);
+}
+
+.air-nice-to-have--missed svg {
+  color: var(--air-icon-muted);
+}

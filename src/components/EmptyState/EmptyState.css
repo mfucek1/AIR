@@ -1,0 +1,40 @@
+/* Empty state — Figma component "Empty state" with the Illustration/* art. */
+.air-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--air-space-16);
+  padding: var(--air-space-32) var(--air-space-24);
+  text-align: center;
+}
+
+.air-empty-state__art {
+  flex: none;
+}
+
+.air-empty-state__art .i-skeleton { fill: var(--air-bg-skeleton); }
+.air-empty-state__art .i-surface { fill: var(--air-bg-surface); }
+.air-empty-state__art .i-strong { fill: var(--air-border-strong); }
+.air-empty-state__art .i-action { fill: var(--air-action-primary); }
+.air-empty-state__art .i-outline { stroke: var(--air-border-strong); }
+.air-empty-state__art .i-surface-line { stroke: var(--air-bg-surface); }
+
+.air-empty-state__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--air-space-4);
+  max-width: 304px;
+}
+
+.air-empty-state__title {
+  margin: 0;
+  color: var(--air-text-primary);
+  font: var(--air-font-title-s);
+  letter-spacing: var(--air-tracking-title-s);
+}
+
+.air-empty-state__description {
+  margin: 0;
+  color: var(--air-text-secondary);
+  font: var(--air-font-body-s);
+}

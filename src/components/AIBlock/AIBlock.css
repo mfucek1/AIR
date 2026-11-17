@@ -1,0 +1,73 @@
+/* AI block — Figma component set "AI block" (State). Violet is only for what the AI made. */
+.air-ai-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--air-space-8);
+  padding: var(--air-space-16);
+  border: var(--air-stroke-default) solid var(--air-ai-border);
+  border-radius: var(--air-radius-lg);
+  background: var(--air-ai-surface);
+  color: var(--air-text-primary);
+}
+
+.air-ai-block__header {
+  display: flex;
+  align-items: center;
+  gap: var(--air-space-8);
+  min-height: var(--air-size-control-sm);
+}
+
+.air-ai-block__icon {
+  flex: none;
+  color: var(--air-ai-icon);
+}
+
+.air-ai-block__title {
+  margin: 0;
+  color: var(--air-ai-text);
+  font: var(--air-font-body-m-strong);
+  letter-spacing: var(--air-tracking-body-m-strong);
+}
+
+.air-ai-block__meta {
+  flex: 1;
+  /* text/secondary, not muted: muted is 4.3:1 on the AI surface. */
+  color: var(--air-text-secondary);
+  font: var(--air-font-caption);
+}
+
+.air-ai-block__feedback {
+  display: inline-flex;
+  gap: var(--air-space-4);
+}
+
+.air-ai-block__feedback [aria-pressed='true'] {
+  --ib-bg: var(--air-bg-selected);
+  --ib-fg: var(--air-icon-action);
+}
+
+.air-ai-block__body {
+  font: var(--air-font-body-m);
+  letter-spacing: var(--air-tracking-body-m);
+}
+
+.air-ai-block__body > :first-child {
+  margin-top: 0;
+}
+
+.air-ai-block__body > :last-child {
+  margin-bottom: 0;
+}
+
+.air-ai-block__loading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--air-space-8);
+  padding: var(--air-space-4) 0;
+}
+
+.air-ai-block__footer {
+  margin: 0;
+  color: var(--air-text-secondary);
+  font: var(--air-font-caption);
+}

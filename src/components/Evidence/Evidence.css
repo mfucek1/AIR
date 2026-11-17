@@ -1,0 +1,153 @@
+/* Candidate evidence — Figma component sets "Citation chip", "Criteria evidence row" and "Flag row". */
+
+/* Citation chip */
+.air-citation {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: var(--air-space-4);
+  height: 20px;
+  padding: 0 var(--air-space-8) 0 var(--air-space-4);
+  border: var(--air-stroke-default) solid var(--air-border-subtle);
+  border-radius: var(--air-radius-sm);
+  background: var(--air-bg-surface);
+  color: var(--air-text-secondary);
+  font: var(--air-font-caption);
+  letter-spacing: var(--air-tracking-caption);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.air-citation svg {
+  color: var(--air-icon-muted);
+}
+
+.air-citation:hover {
+  background: var(--air-bg-hover);
+}
+
+.air-citation--selected,
+.air-citation--selected:hover {
+  border-color: var(--air-border-selected);
+  background: var(--air-bg-selected);
+  color: var(--air-text-link);
+}
+
+.air-citation--selected svg {
+  color: var(--air-icon-action);
+}
+
+.air-citation:focus-visible {
+  outline: none;
+  box-shadow: var(--air-effect-focus-ring);
+}
+
+/* Criteria evidence row */
+.air-criterion {
+  --status-text: var(--air-success-text);
+
+  display: flex;
+  align-items: flex-start;
+  gap: var(--air-space-12);
+  padding: var(--air-space-12);
+  border-radius: var(--air-radius-md);
+}
+
+.air-criterion--partly { --status-text: var(--air-warning-text); }
+.air-criterion--not-met { --status-text: var(--air-danger-text); }
+.air-criterion--unknown { --status-text: var(--air-text-muted); }
+
+.air-criterion--selected {
+  background: var(--air-bg-selected);
+}
+
+.air-criterion__content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--air-space-4);
+  min-width: 0;
+}
+
+.air-criterion__title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--air-space-4) var(--air-space-8);
+}
+
+.air-criterion__name {
+  font: var(--air-font-body-m-strong);
+  letter-spacing: var(--air-tracking-body-m-strong);
+  color: var(--air-text-primary);
+}
+
+.air-criterion__status {
+  flex: 1;
+  color: var(--status-text);
+  font: var(--air-font-caption-strong);
+  letter-spacing: var(--air-tracking-caption-strong);
+}
+
+.air-criterion__evidence {
+  margin: 0;
+  color: var(--air-text-secondary);
+  font: var(--air-font-body-s);
+  letter-spacing: var(--air-tracking-body-s);
+}
+
+.air-criterion--unknown .air-criterion__evidence {
+  color: var(--air-text-muted);
+}
+
+/* Flag row */
+.air-flag {
+  --flag-bg: var(--air-danger-bg);
+  --flag-border: var(--air-danger-border);
+  --flag-icon: var(--air-danger-icon);
+
+  display: flex;
+  align-items: center;
+  gap: var(--air-space-8);
+  padding: var(--air-space-8) var(--air-space-12);
+  border: var(--air-stroke-default) solid var(--flag-border);
+  border-radius: var(--air-radius-md);
+  background: var(--flag-bg);
+}
+
+.air-flag--warning {
+  --flag-bg: var(--air-warning-bg);
+  --flag-border: var(--air-warning-border);
+  --flag-icon: var(--air-warning-icon);
+}
+
+.air-flag--success {
+  --flag-bg: var(--air-success-bg);
+  --flag-border: var(--air-success-border);
+  --flag-icon: var(--air-success-icon);
+}
+
+.air-flag--info {
+  --flag-bg: var(--air-info-bg);
+  --flag-border: var(--air-info-border);
+  --flag-icon: var(--air-icon-action);
+}
+
+.air-flag__icon {
+  flex: none;
+  color: var(--flag-icon);
+}
+
+.air-flag__text {
+  flex: 1;
+  margin: 0;
+  color: var(--air-text-secondary);
+  font: var(--air-font-body-m);
+  letter-spacing: var(--air-tracking-body-m);
+}
+
+.air-flag__title {
+  margin-right: var(--air-space-4);
+  color: var(--air-text-primary);
+  font: var(--air-font-body-m-strong);
+}
