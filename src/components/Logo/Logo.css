@@ -1,0 +1,39 @@
+/* Logo — Figma component set "Logo" (Tone). */
+.air-logo {
+  display: inline-flex;
+  flex: none;
+  align-items: flex-start;
+  gap: 3px;
+}
+
+.air-logo__wordmark {
+  color: var(--air-chrome-text-active);
+  font: var(--air-font-title-m);
+  letter-spacing: var(--air-tracking-title-m);
+}
+
+.air-logo__mark {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding-top: var(--air-space-8);
+}
+
+.air-logo__bar {
+  width: 14px;
+  height: 3px;
+  border-radius: 1.5px;
+  background: var(--air-chrome-item-indicator);
+}
+
+.air-logo__bar--short {
+  width: 9px;
+}
+
+.air-logo--on-surface .air-logo__wordmark {
+  color: var(--air-brand-ink);
+}
+
+.air-logo--on-surface .air-logo__bar {
+  background: var(--air-brand-primary);
+}

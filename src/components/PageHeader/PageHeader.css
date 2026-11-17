@@ -1,0 +1,90 @@
+/* Page header — Figma component set "Page header", Type=Page. (Type=Profile is parked in Figma.) */
+.air-page-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--air-space-16);
+  padding: var(--air-space-20) var(--air-space-24);
+  border-bottom: var(--air-stroke-default) solid var(--air-border-subtle);
+  background: var(--air-bg-surface);
+}
+
+.air-page-header__text {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  gap: var(--air-space-4);
+  min-width: 0;
+}
+
+.air-page-header__back {
+  align-self: flex-start;
+}
+
+/* 40 px tall, so the title lines up with the 40 px action buttons. */
+.air-page-header__title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--air-space-12);
+  min-height: var(--air-size-control-md);
+}
+
+.air-page-header__title {
+  margin: 0;
+  color: var(--air-text-primary);
+  font: var(--air-font-title-l);
+  letter-spacing: var(--air-tracking-title-l);
+}
+
+.air-page-header__description {
+  margin: 0;
+  color: var(--air-text-secondary);
+  font: var(--air-font-body-m);
+  letter-spacing: var(--air-tracking-body-m);
+}
+
+.air-page-header__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--air-space-4) var(--air-space-16);
+  margin: 0;
+  padding: var(--air-space-4) 0 0;
+  list-style: none;
+}
+
+.air-page-header__meta-item {
+  display: flex;
+  align-items: center;
+  gap: var(--air-space-4);
+  color: var(--air-text-secondary);
+  font: var(--air-font-body-m);
+  letter-spacing: var(--air-tracking-body-m);
+}
+
+/* Icon tint Muted. */
+.air-page-header__meta-icon {
+  flex: none;
+  color: var(--air-icon-muted);
+}
+
+.air-page-header__filters,
+.air-page-header__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--air-space-8);
+  min-height: var(--air-size-control-md);
+}
+
+/* Filters are 168 px Select S. */
+.air-page-header__filters > .air-field {
+  width: 168px;
+}
+
+/* Phones: the title and description get their own row; filters and actions wrap below. */
+@media (max-width: 640px) {
+  .air-page-header__text {
+    flex-basis: 100%;
+  }
+}

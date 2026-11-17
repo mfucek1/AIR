@@ -1,0 +1,75 @@
+/* Nav item — Figma component set "Nav item" (State × Collapsed). */
+.air-nav-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--air-space-12);
+  width: 100%;
+  height: var(--air-size-control-md);
+  padding: 0 var(--air-space-12);
+  border-radius: var(--air-radius-md);
+  color: var(--air-chrome-text);
+  font: var(--air-font-body-m-strong);
+  letter-spacing: var(--air-tracking-body-m-strong);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* Icon tint Chrome at rest. */
+.air-nav-item__icon {
+  display: inline-flex;
+  flex: none;
+  color: var(--air-chrome-text);
+}
+
+.air-nav-item__label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.air-nav-item:hover:not([aria-current='page']) {
+  background: var(--air-chrome-item-hover);
+  color: var(--air-chrome-text-active);
+}
+
+/* Hover: Inverse tint in the Light colour mode, so a white icon. */
+.air-nav-item:hover:not([aria-current='page']) .air-nav-item__icon {
+  color: var(--air-icon-inverse);
+}
+
+/* Active: petrol fill and a 3 px indicator on the left, drawn inside so it takes no space. */
+.air-nav-item[aria-current='page'] {
+  border-radius: var(--air-radius-none);
+  background: var(--air-chrome-item-active);
+  color: var(--air-chrome-text-active);
+  box-shadow: inset var(--air-stroke-indicator) 0 0 0 var(--air-chrome-item-indicator);
+}
+
+/* Action tint; the icon slot is in the Dark colour mode. */
+.air-nav-item[aria-current='page'] .air-nav-item__icon {
+  color: var(--air-icon-action);
+}
+
+/* Focus ring: 2 px of the chrome showing through, then the 2 px focus colour. */
+.air-nav-item:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 var(--air-space-2) var(--air-chrome-bg),
+    0 0 0 var(--air-space-4) var(--air-border-focus);
+}
+
+.air-nav-item[aria-current='page']:focus-visible {
+  box-shadow:
+    inset var(--air-stroke-indicator) 0 0 0 var(--air-chrome-item-indicator),
+    0 0 0 var(--air-space-2) var(--air-chrome-bg),
+    0 0 0 var(--air-space-4) var(--air-border-focus);
+}
+
+.air-nav-item--collapsed {
+  justify-content: center;
+  gap: 0;
+  width: var(--air-size-control-md);
+  padding: 0;
+}

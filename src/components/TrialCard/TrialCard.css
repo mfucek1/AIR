@@ -1,0 +1,90 @@
+/* Trial card — Figma component set "Trial card" (Visual × State). */
+.air-trial-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--air-space-12);
+  padding: var(--air-space-16);
+  border-radius: var(--air-radius-md);
+  background: var(--air-chrome-item-hover);
+}
+
+.air-trial-card__visual {
+  flex: none;
+  border-radius: var(--air-radius-xs);
+}
+
+.air-trial-card__visual--lo-fi {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--air-size-control-md);
+  height: var(--air-size-control-md);
+  background: var(--air-chrome-bg);
+}
+
+.air-trial-card__icon {
+  color: var(--air-icon-action);
+}
+
+.air-trial-card--ending .air-trial-card__icon {
+  color: var(--air-warning-icon);
+}
+
+.air-trial-card--ended .air-trial-card__icon {
+  color: var(--air-chrome-text);
+}
+
+.air-trial-card__visual--hi-fi {
+  width: 48px;
+  height: 48px;
+}
+
+.air-trial-card__visual--illustration {
+  width: 100%;
+  height: auto;
+}
+
+.air-trial-card__copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--air-space-4);
+}
+
+.air-trial-card__title {
+  margin: 0;
+  color: var(--air-chrome-text-active);
+  font: var(--air-font-body-m-strong);
+  letter-spacing: var(--air-tracking-body-m-strong);
+}
+
+.air-trial-card__text {
+  margin: 0;
+  color: var(--air-chrome-text);
+  font: var(--air-font-body-s);
+  letter-spacing: var(--air-tracking-body-s);
+}
+
+/* One segment per day, in the Dark colour mode like Figma. */
+.air-trial-card__days {
+  display: flex;
+  gap: var(--air-space-2);
+}
+
+.air-trial-card__day {
+  flex: 1;
+  height: 4px;
+  border-radius: var(--air-radius-full);
+  background: var(--air-chrome-bg);
+}
+
+.air-trial-card--ending .air-trial-card__day {
+  background: var(--air-warning-solid);
+}
+
+.air-trial-card .air-trial-card__day--used {
+  background: var(--air-action-primary);
+}
+
+.air-trial-card__action {
+  width: 100%;
+}

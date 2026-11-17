@@ -1,0 +1,48 @@
+/* Breadcrumbs — Figma component "Breadcrumbs" (Show item 1, Show item 2, Current). */
+.air-breadcrumbs {
+  min-width: 0;
+}
+
+.air-breadcrumbs__list {
+  display: flex;
+  align-items: center;
+  gap: var(--air-space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.air-breadcrumbs__item {
+  display: flex;
+  align-items: center;
+  gap: var(--air-space-4);
+  min-width: 0;
+}
+
+/* On narrow screens the links shorten before the current page does. */
+.air-breadcrumbs__link {
+  min-width: 0;
+}
+
+.air-breadcrumbs__link .air-link__label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Icon tint Muted. */
+.air-breadcrumbs__separator {
+  flex: none;
+  color: var(--air-icon-muted);
+}
+
+.air-breadcrumbs__current {
+  flex: none;
+  max-width: 100%;
+  overflow: hidden;
+  color: var(--air-text-primary);
+  font: var(--air-font-body-s);
+  letter-spacing: var(--air-tracking-body-s);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

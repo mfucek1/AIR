@@ -10,13 +10,13 @@ Design and build by [Marko Fuček](https://markofucek.com). Figma first, built w
 - **Components:**
   - Actions: Button, Icon button, Link
   - Forms: Input (with Input action), Textarea, Select, Checkbox, Radio, Switch, Segmented control, Filter chip, Filter option, Tag input
-  - Navigation: Tabs, Menu (with Menu item and Divider)
+  - Navigation: Tabs, Menu (with Menu item and Divider), Sidebar (with Nav item, Icon duotone, Logo and Trial card), Top bar (with Breadcrumbs and Command search)
   - Feedback: Tooltip, Toast, Banner, Progress, Skeleton, Dialog, Empty state
   - Data display: Badge, Counter, Tag, Avatar, Avatar stack, Rating
-  - Layout: Section header, Section toggle
+  - Layout: Section header, Section toggle, Page header
   - AIR: Stage path, Match grade (with the must-haves popover), Citation chip, Criteria evidence row, Flag row, AI block, Decision bar, Candidate card
 
-  Still to come: sidebar and top bar, date picker, file upload, money and phone inputs, quick fill, the video pre-screening set, document viewer, rich text editor, audio recorder.
+  Still to come: date picker, file upload, money and phone inputs, quick fill, the video pre-screening set, document viewer, rich text editor, audio recorder.
 - **Figma to code** ([air.markofucek.com/figma-to-code/](https://air.markofucek.com/figma-to-code/)): Button, Badge, Tag and Avatar as drawn in Figma with their variables, beside the React components and the CSS line for each variable.
 - **Checks:** every story runs an accessibility check (axe) in the Storybook panel.
 

@@ -14,6 +14,7 @@ Storybook of AIR's components (an ATS), built in code from the AIR Figma file. L
 - Pages: 🧩 Components 2026 `9043:730`, 🎨 Foundations 2026 `9038:730`, 🔄 Refresh 2026 `9010:6542` (screens), 🔮 Exploration `1:2`.
 - Variables carry WEB code syntax (`var(--air-…)`). Collections: AIR · Primitives, AIR · Color (Light, Dark), AIR · Size, AIR · Icon tint (modes Default, Muted, Action, Inverse, AI, Danger, Success, Warning, Chrome, Disabled).
 - Icon colours in code follow the Icon tint mode set on each variant (for example Menu item: Muted at rest, Default on hover, Action for the check).
+- Where Figma sets the AIR · Color mode to Dark on a layer inside a light component, code puts `data-theme="dark"` on that element (Toast inverse, the active Nav item icon, the Trial card's days bar and button, the Sidebar footer).
 - Focus: most controls have a "Focus ring" boolean (a hidden 2 px border/focus layer); fields use State=Focus. In code it's `:focus-visible` with `box-shadow: var(--air-effect-focus-ring)`.
 - `scripts/figma-component-spec.js`: paste into a `use_figma` call (set `SETS` to component set or section ids) to get each set's props, the base variant's layout, tokens, size variables and text styles, and what changes per variant. `BASE` reads another variant as the base (by set id).
 
@@ -45,13 +46,12 @@ Storybook of AIR's components (an ATS), built in code from the AIR Figma file. L
 - Workflow agreed with Marko: one branch per batch, run the checks, then merge to main and push.
 
 ## Still to build (from the Components page)
-- App shell: Sidebar (Nav item, Logo, Trial card), Top bar (Breadcrumbs, Command search), Page header.
 - Inputs: Date picker (Calendar, range, Calendar day), File upload (File item, dropzone), Money input, Phone input, Quick fill (Attachment chip), Rich text editor, Audio recorder.
 - Document viewer (toolbar, page, viewer, Highlighted text).
 - Video pre-screening: Video thumbnail, Video player, Reaction icon, Reaction chip, Recorder control, Score input, Question item.
-- Icon duotone.
 
 ## Open in Figma
+- Parked in Figma, so not built: Top bar Type=Chrome (the dark full-width bar) and Page header Type=Profile.
 - Pre-screening review versions 2A–2E (Refresh 2026, section `9615:61808`) repeat hand-built frames: Team rating, Score bars / Score per answer, the AI summary cell, Questionnaire summary. Make them components once Marko confirms 2A.
 - Section 6 has two "Jobs > Job details" screens and one "Jobs > Candidates" screen without the "Before ·" prefix; they use the 2023 library and a deleted Tag component.
 - Section 4's job page has no tabs.

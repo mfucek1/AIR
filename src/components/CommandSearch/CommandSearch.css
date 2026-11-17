@@ -1,0 +1,57 @@
+/* Command search — Figma component set "Command search" (State). */
+.air-command-search {
+  position: relative;
+  display: flex;
+  flex: 0 1 320px;
+  align-items: center;
+  gap: var(--air-space-8);
+  min-width: 0;
+  height: var(--air-size-control-sm);
+  padding: 0 var(--air-space-4) 0 var(--air-space-12);
+  border: var(--air-stroke-default) solid var(--air-border-subtle);
+  border-radius: var(--air-radius-md);
+  background: var(--air-bg-canvas);
+  font: var(--air-font-body-s);
+  letter-spacing: var(--air-tracking-body-s);
+  text-align: left;
+  cursor: pointer;
+}
+
+.air-command-search:hover {
+  border-color: var(--air-border-strong);
+}
+
+.air-command-search:focus-visible {
+  outline: none;
+  box-shadow: var(--air-effect-focus-ring);
+}
+
+/* Icon tint Muted. */
+.air-command-search__icon {
+  flex: none;
+  color: var(--air-icon-muted);
+}
+
+/* text/secondary, not muted: muted on bg/canvas is 4.3:1 (fixed in Figma on 17 Nov). */
+.air-command-search__placeholder {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--air-text-secondary);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.air-command-search__keys {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  height: 20px;
+  padding: 0 var(--air-space-4);
+  border: var(--air-stroke-default) solid var(--air-border-subtle);
+  border-radius: var(--air-radius-xs);
+  background: var(--air-bg-surface);
+  color: var(--air-text-muted);
+  font: var(--air-font-caption);
+  letter-spacing: var(--air-tracking-caption);
+}

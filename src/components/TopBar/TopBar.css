@@ -1,0 +1,81 @@
+/* Top bar — Figma component set "Top bar", Type=Page. (Type=Chrome is parked in Figma.) */
+.air-top-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--air-space-8);
+  height: 56px;
+  padding: 0 var(--air-space-24);
+  border-bottom: var(--air-stroke-default) solid var(--air-border-subtle);
+  background: var(--air-bg-surface);
+}
+
+.air-top-bar__path {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Figma puts an 8 px gap frame between the search and the icons. */
+.air-top-bar__actions {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--air-space-8);
+  margin-left: var(--air-space-8);
+}
+
+.air-top-bar__notifications {
+  position: relative;
+  display: inline-flex;
+}
+
+/* 10 px dot with a 2 px ring in the bar's colour, at 23, 9 in the 40 px button. */
+.air-top-bar__dot {
+  position: absolute;
+  top: 9px;
+  left: 23px;
+  width: 10px;
+  height: 10px;
+  border-radius: var(--air-radius-full);
+  background: var(--air-danger-icon);
+  box-shadow: 0 0 0 var(--air-space-2) var(--air-bg-surface);
+  pointer-events: none;
+}
+
+.air-top-bar__account {
+  display: inline-flex;
+  padding: 0;
+  border: none;
+  border-radius: var(--air-radius-full);
+  background: none;
+  cursor: pointer;
+}
+
+.air-top-bar__account:focus-visible {
+  outline: none;
+  box-shadow: var(--air-effect-focus-ring);
+}
+
+/* Phones: the search becomes its 32 px icon (the placeholder stays as its accessible name)
+   and the path shows only the current page. Figma has no phone version of the Top bar. */
+@media (max-width: 640px) {
+  .air-top-bar .air-command-search {
+    flex: none;
+    justify-content: center;
+    width: var(--air-size-control-sm);
+    padding: 0;
+  }
+
+  .air-top-bar .air-command-search__placeholder {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  .air-top-bar .air-command-search__keys,
+  .air-top-bar .air-breadcrumbs__item:not(.air-breadcrumbs__current) {
+    display: none;
+  }
+}

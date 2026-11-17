@@ -20,6 +20,15 @@ export { FilterChip, FilterOption, TagInput, type FilterChipProps, type FilterOp
 // Navigation
 export { Tabs, type TabsProps, type TabItem } from './components/Tabs/Tabs';
 export { Menu, MenuItem, Divider, type MenuProps, type MenuItemProps, type DividerProps } from './components/Menu/Menu';
+export { Sidebar, type SidebarProps } from './components/Sidebar/Sidebar';
+export { NavItem, type NavItemProps } from './components/NavItem/NavItem';
+export { IconDuotone, type IconDuotoneProps, type IconDuotoneName } from './components/IconDuotone/IconDuotone';
+export { iconDuotoneNames } from './components/IconDuotone/icons';
+export { Logo, type LogoProps } from './components/Logo/Logo';
+export { TrialCard, type TrialCardProps } from './components/TrialCard/TrialCard';
+export { TopBar, type TopBarProps } from './components/TopBar/TopBar';
+export { Breadcrumbs, type BreadcrumbsProps, type Crumb } from './components/Breadcrumbs/Breadcrumbs';
+export { CommandSearch, type CommandSearchProps } from './components/CommandSearch/CommandSearch';
 
 // Feedback
 export { Tooltip, type TooltipProps } from './components/Tooltip/Tooltip';
@@ -42,6 +51,7 @@ export { Rating, type RatingProps } from './components/Rating/Rating';
 
 // Layout
 export { SectionHeader, SectionToggle, type SectionHeaderProps, type SectionToggleProps } from './components/Section/Section';
+export { PageHeader, type PageHeaderProps, type PageHeaderMeta } from './components/PageHeader/PageHeader';
 
 // AIR
 export { StagePath, PathStep, type StagePathProps, type StagePathStep, type PathStepProps, type StepState } from './components/StagePath/StagePath';
