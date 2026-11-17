@@ -1,0 +1,388 @@
+/* Figma to code: the stage of the "Figma to code" card on markofucek.com (portfolio Figma,
+   "Component card · AIR · Figma to code", 1737:10910 at 1440 and 1737:11024 at 390). The page
+   is the card's chrome, so it uses the portfolio's flat palette, not AIR's roles; the
+   components inside it use AIR's tokens as everywhere else. */
+:root {
+  --ftc-ink: #0e1116; /* flat/ink */
+  --ftc-text-2: #4a535e;
+  --ftc-line: #e1e4e8; /* flat/line */
+  --ftc-paper: #f6f7f8;
+  --ftc-white: #ffffff;
+  --ftc-var: #005f7d; /* the var() in code lines */
+  --ftc-match: rgb(0 95 125 / 0.11);
+  --ftc-figma: #9747ff; /* Figma's component purple: outline, handles, mark */
+  --ftc-figma-text: #8f3ff7; /* a shade darker for the 11 px name: 4.6:1 on paper */
+  --ftc-sans: 'Inter Variable', Inter, system-ui, sans-serif;
+  --ftc-mono: 'Roboto Mono', ui-monospace, Menlo, monospace;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background: var(--ftc-white);
+  color: var(--ftc-ink);
+  font-family: var(--ftc-sans);
+}
+
+.ftc {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+/* Tabs: ink underline on the current one, 24 apart */
+.ftc__tabs {
+  display: flex;
+  flex: none;
+  gap: 24px;
+  padding: 0 24px;
+  border-top: 1px solid var(--ftc-line);
+  border-bottom: 1px solid var(--ftc-line);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.ftc__tab {
+  display: inline-flex;
+  flex: none;
+  flex-direction: column;
+  align-items: center;
+  padding: 13px 0;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: none;
+  color: var(--ftc-text-2);
+  font: 500 14px/20px var(--ftc-sans);
+  cursor: pointer;
+}
+
+/* Reserves the Semi Bold width, so the row doesn't shift when the tab changes */
+.ftc__tab::after {
+  content: attr(data-label);
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  font-weight: 600;
+}
+
+.ftc__tab:hover {
+  color: var(--ftc-ink);
+}
+
+.ftc__tab[aria-selected='true'] {
+  border-bottom-color: var(--ftc-ink);
+  color: var(--ftc-ink);
+  font-weight: 600;
+}
+
+.ftc__tab:focus-visible,
+.ftc__usage:focus-visible {
+  outline: 2px solid var(--ftc-ink);
+  outline-offset: 2px;
+}
+
+/* Two panes: Figma on paper, code on white */
+.ftc__panes {
+  display: grid;
+  flex: 1;
+  grid-template-columns: 1fr 1fr;
+}
+
+.ftc__pane {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+  padding: 24px 32px;
+}
+
+.ftc__pane--figma {
+  background: var(--ftc-paper);
+}
+
+.ftc__pane--code {
+  border-left: 1px solid var(--ftc-line);
+  background: var(--ftc-white);
+}
+
+.ftc__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 20px;
+}
+
+.ftc__title {
+  margin: 0;
+  font: 600 14px/20px var(--ftc-sans);
+}
+
+.ftc__meta {
+  margin: 0;
+  color: var(--ftc-text-2);
+  font: 400 13px/20px var(--ftc-sans);
+  white-space: nowrap;
+}
+
+.ftc__usage {
+  color: var(--ftc-text-2);
+  font: 400 13px/20px var(--ftc-mono);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.ftc__usage:hover {
+  color: var(--ftc-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.ftc__narrow {
+  display: none;
+}
+
+/* The canvases: 176 tall, the component in the middle */
+.ftc__canvas {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  height: 176px;
+  border: 1px solid var(--ftc-line);
+}
+
+.ftc__canvas--figma {
+  background: var(--ftc-paper);
+}
+
+.ftc__canvas--code {
+  background: var(--ftc-white);
+}
+
+/* Figma's selection: the component's name above, a purple outline with four handles */
+.ftc__selected {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.ftc__component {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  color: var(--ftc-figma-text);
+  font: 500 11px/16px var(--ftc-sans);
+}
+
+.ftc__mark {
+  width: 6px;
+  height: 6px;
+  margin: 0 3px;
+  background: var(--ftc-figma);
+  transform: rotate(45deg);
+}
+
+.ftc__selection {
+  position: relative;
+  outline: 1px solid var(--ftc-figma);
+}
+
+.ftc__selection img {
+  display: block;
+}
+
+.ftc__handle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border: 1px solid var(--ftc-figma);
+  background: var(--ftc-white);
+}
+
+.ftc__handle--tl {
+  top: -3px;
+  left: -3px;
+}
+
+.ftc__handle--tr {
+  top: -3px;
+  right: -3px;
+}
+
+.ftc__handle--bl {
+  bottom: -3px;
+  left: -3px;
+}
+
+.ftc__handle--br {
+  right: -3px;
+  bottom: -3px;
+}
+
+/* Rows: 38 tall with a line under each; the same row lights up on both sides */
+.ftc__rows {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ftc__row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 38px;
+  border-bottom: 1px solid var(--ftc-line);
+  transition: background-color 120ms ease-out, box-shadow 120ms ease-out;
+}
+
+.ftc__row.is-match {
+  background: var(--ftc-match);
+  box-shadow: -8px 0 0 var(--ftc-match), 8px 0 0 var(--ftc-match);
+}
+
+.ftc__row.is-match .ftc__label,
+.ftc__row.is-match .ftc__code-prop {
+  color: var(--ftc-ink);
+}
+
+.ftc__label {
+  flex: none;
+  width: 96px;
+  color: var(--ftc-text-2);
+  font: 400 13px/20px var(--ftc-sans);
+}
+
+.ftc__chips {
+  display: flex;
+  gap: 6px;
+  min-width: 0;
+  margin: 0;
+}
+
+.ftc__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px;
+  border: 1px solid var(--ftc-line);
+  background: var(--ftc-white);
+  font: 500 13px/20px var(--ftc-sans);
+  white-space: nowrap;
+}
+
+.ftc__swatch {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  border: 1px solid var(--ftc-line);
+}
+
+.ftc__code {
+  overflow: hidden;
+  font: 400 12.5px/20px var(--ftc-mono);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ftc__code-prop {
+  color: var(--ftc-text-2);
+}
+
+.ftc__code-var {
+  color: var(--ftc-var);
+}
+
+.ftc__code-end {
+  color: var(--ftc-ink);
+}
+
+/* Narrower: the variant as values only, no usage line */
+@media (max-width: 1099px) {
+  .ftc__pane {
+    padding: 24px;
+  }
+
+  .ftc__label {
+    width: 80px;
+  }
+
+  .ftc__wide {
+    display: none;
+  }
+
+  .ftc__narrow {
+    display: inline;
+  }
+}
+
+/* Phones and tablets: the panes stack, four rows each (the card's stage is 713 tall there) */
+@media (max-width: 899px) {
+  .ftc__tabs {
+    gap: 20px;
+    padding: 0 16px;
+  }
+
+  .ftc__tab {
+    padding: 12px 0;
+  }
+
+  .ftc__panes {
+    grid-template-columns: 1fr;
+  }
+
+  .ftc__pane {
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .ftc__pane--code {
+    border-top: 1px solid var(--ftc-line);
+    border-left: 0;
+  }
+
+  .ftc__head {
+    gap: 8px;
+  }
+
+  .ftc__meta {
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  .ftc__canvas {
+    height: 112px;
+  }
+
+  .ftc__row {
+    gap: 8px;
+    height: 36px;
+  }
+
+  .ftc__row:not(.ftc__row--phone) {
+    display: none;
+  }
+
+  .ftc__label {
+    width: 64px;
+  }
+
+  .ftc__code {
+    font-size: 11.5px;
+    line-height: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ftc__row {
+    transition: none;
+  }
+}

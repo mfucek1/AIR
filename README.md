@@ -17,6 +17,7 @@ Design and build by [Marko Fuček](https://markofucek.com). Figma first, built w
   - AIR: Stage path, Match grade (with the must-haves popover), Citation chip, Criteria evidence row, Flag row, AI block, Decision bar, Candidate card
 
   Still to come: sidebar and top bar, date picker, file upload, money and phone inputs, quick fill, the video pre-screening set, document viewer, rich text editor, audio recorder.
+- **Figma to code** ([air.markofucek.com/figma-to-code/](https://air.markofucek.com/figma-to-code/)): Button, Badge, Tag and Avatar as drawn in Figma with their variables, beside the React components and the CSS line for each variable.
 - **Checks:** every story runs an accessibility check (axe) in the Storybook panel.
 
 ## Tokens: Figma → CSS
@@ -36,6 +37,7 @@ npm install
 npm run storybook   # local Storybook at http://localhost:6006
 npm run build       # static site in storybook-static/
 npm run typecheck
+npm run figma-to-code   # the Figma to code page at http://localhost:6008/figma-to-code/
 ```
 
 ## Structure
@@ -46,6 +48,7 @@ src/tokens/tokens.css      generated tokens
 src/styles/global.css      Inter, tokens, base styles
 src/foundations/           Foundations docs pages
 src/components/<Name>/     component, styles and stories
+figma-to-code/             the Figma to code page (air.markofucek.com/figma-to-code/)
 .storybook/                Storybook config and AIR theme
 ```
 

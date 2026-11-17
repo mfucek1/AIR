@@ -4,9 +4,12 @@
 // icon tint) and, for variants one property away from the base, only what changes.
 // Keys: k type, n name, sz size, al layout (dir, gap, padding t/r/b/l, align), lz sizing
 // (Fixed/Hug/Fill), bg fill, st stroke, r radius, fx effect style, tint Icon tint mode,
-// t text, ts text style, c text colour, is instance of, pr property links.
+// t text, ts text style, c text colour, is instance of, pr property links, szv size variables
+// (w width, h height, mh min height).
+// BASE (optional) picks the variant read as the base, by set id, instead of the set's first one.
 
 const SETS = ['9048:1210'];
+const BASE = {}; // e.g. { '9051:1490': 'Size=L, Type=Initials' }
 const COMPONENTS_PAGE = '9043:730';
 
 const page = await figma.getNodeByIdAsync(COMPONENTS_PAGE);
@@ -50,6 +53,9 @@ async function spec(n, depth) {
   const o = { k: n.type[0] + n.type.slice(1, 3).toLowerCase(), n: n.name.slice(0, 36) };
   if (!n.visible) o.hid = 1;
   o.sz = Math.round(n.width) + 'x' + Math.round(n.height);
+  const bv = n.boundVariables || {};
+  const szv = [['w', 'width'], ['h', 'height'], ['mh', 'minHeight']].filter(([, k]) => bv[k]);
+  if (szv.length) o.szv = (await Promise.all(szv.map(async ([a, k]) => a + ':' + (await vn(bv[k]))))).join(' ');
   if ('layoutMode' in n && n.layoutMode && n.layoutMode !== 'NONE')
     o.al = n.layoutMode[0] + ' g' + (await num(n, 'itemSpacing')) + ' p' + [await num(n, 'paddingTop'), await num(n, 'paddingRight'), await num(n, 'paddingBottom'), await num(n, 'paddingLeft')].join('/') + ' ' + (n.primaryAxisAlignItems || '')[0] + (n.counterAxisAlignItems || '')[0];
   if ('layoutSizingHorizontal' in n && n.parent && n.parent.type !== 'COMPONENT_SET') o.lz = (n.layoutSizingHorizontal || '')[0] + (n.layoutSizingVertical || '')[0];
@@ -79,14 +85,14 @@ for (const sid of SETS) {
     if (set.type !== 'COMPONENT_SET') { r.spec = await spec(set, 0); result[set.name] = r; continue; }
     r.props = Object.fromEntries(Object.entries(set.componentPropertyDefinitions).map(([k, v]) => [k.split('#')[0], v.type === 'VARIANT' ? v.variantOptions.join('/') : v.type + (v.type === 'BOOLEAN' || v.type === 'TEXT' ? '=' + String(v.defaultValue).slice(0, 40) : '')]));
     const variants = set.children.filter((c) => c.type === 'COMPONENT');
-    const base = variants[0];
+    const base = variants.find((v) => v.name === BASE[set.id]) || variants[0];
     r.base = base.name;
     r.spec = await spec(base, 0);
     const baseProps = props(base.name);
     const bf = {};
     for (const [k, v] of Object.entries(flat(r.spec, '', {}))) bf[k.replace(/^\/[^/]+/, '')] = v;
     r.diff = {};
-    for (const v of variants.slice(1)) {
+    for (const v of variants.filter((x) => x !== base)) {
       const p = props(v.name);
       if (Object.keys(p).filter((k) => p[k] !== baseProps[k]).length > 1) continue;
       const d = {};

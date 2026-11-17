@@ -5,12 +5,14 @@
   "type": "module",
   "scripts": {
     "storybook": "storybook dev -p 6006",
-    "build": "storybook build -o storybook-static",
+    "build": "storybook build -o storybook-static && vite build --config figma-to-code/vite.config.ts",
     "typecheck": "tsc -b",
-    "lint": "oxlint"
+    "lint": "oxlint",
+    "figma-to-code": "vite --config figma-to-code/vite.config.ts"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.3.0",
+    "@fontsource/roboto-mono": "^5.3.0",
     "lucide-react": "^1.74.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1"

@@ -15,7 +15,13 @@ Storybook of AIR's components (an ATS), built in code from the AIR Figma file. L
 - Variables carry WEB code syntax (`var(--air-…)`). Collections: AIR · Primitives, AIR · Color (Light, Dark), AIR · Size, AIR · Icon tint (modes Default, Muted, Action, Inverse, AI, Danger, Success, Warning, Chrome, Disabled).
 - Icon colours in code follow the Icon tint mode set on each variant (for example Menu item: Muted at rest, Default on hover, Action for the check).
 - Focus: most controls have a "Focus ring" boolean (a hidden 2 px border/focus layer); fields use State=Focus. In code it's `:focus-visible` with `box-shadow: var(--air-effect-focus-ring)`.
-- `scripts/figma-component-spec.js`: paste into a `use_figma` call (set `SETS` to component set or section ids) to get each set's props, the base variant's layout, tokens and text styles, and what changes per variant.
+- `scripts/figma-component-spec.js`: paste into a `use_figma` call (set `SETS` to component set or section ids) to get each set's props, the base variant's layout, tokens, size variables and text styles, and what changes per variant. `BASE` reads another variant as the base (by set id).
+
+## Figma to code page
+- `figma-to-code/`: a small Vite page, not a story. `npm run build` builds it into `storybook-static/figma-to-code/`, so it deploys with Storybook to air.markofucek.com/figma-to-code/. markofucek.com shows it in an iframe under Live components (design: the portfolio Figma file, "Component card · AIR · Figma to code", at 1440 and 390).
+- Tabs Button, Badge, Tag, Avatar. Left: the variant exported from Figma (`drawn/*.svg`) and the variables bound to it (`figma-spec.ts`, the spec script's output with the `SETS` and `BASE` noted there). Right: the real component and, per variable, the CSS line from its stylesheet (`rows.ts` reads the `.css` files as text and throws if a line doesn't use the variable Figma binds).
+- Stage sizes: 680 tall side by side from 900 px wide; stacked under 900, four rows a side, 713 tall. The page's chrome uses the portfolio's flat palette; the components use AIR's tokens.
+- `npm run figma-to-code` serves it on port 6008 while editing.
 
 ## Tokens
 - `tokens/figma-export.js` runs in Figma through `use_figma` and returns the text of `src/tokens/tokens.css`. Re-run it after variables change; don't hand-edit values (one exception on record: danger/text → red-700 on 17 Nov was edited by hand to match Figma).
@@ -32,6 +38,7 @@ Storybook of AIR's components (an ATS), built in code from the AIR Figma file. L
 2. `npm run build`.
 3. Accessibility: `scripts/a11y-check.mjs` runs axe on every story of the build (setup in the file). The only accepted hit is helper text under disabled fields (WCAG 1.4.3 exempts inactive components; field stories exclude disabled fields from Storybook's own check).
 4. Look at screenshots of every new or changed story, at desktop and phone widths.
+5. If `figma-to-code/` or a component it shows changed: axe and a look at every tab at 1198 × 680 and 356 × 713.
 
 ## Deploy
 - Cloudflare Pages builds main to production (air.markofucek.com) and every other branch to `https://<branch>.air-8b2.pages.dev`.
