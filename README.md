@@ -7,7 +7,14 @@ Design and build by [Marko Fuček](https://markofucek.com). Figma first, built w
 ## What's inside
 
 - **Foundations:** colour (primitives and roles), typography, spacing, radius, elevation and focus.
-- **Components:** Button, Badge, Badge icon, Tag, Avatar. More follow in batches.
+- **Components:**
+  - Actions: Button, Icon button, Link
+  - Forms: Input (with Input action), Textarea, Select, Checkbox, Radio, Switch, Segmented control
+  - Navigation: Tabs, Menu (with Menu item and Divider)
+  - Feedback: Tooltip, Toast, Banner, Progress, Skeleton
+  - Data display: Badge, Counter, Tag, Avatar, Avatar stack
+
+  AIR's own components (stage path, match grade, evidence rows, candidate card) come next.
 - **Checks:** every story runs an accessibility check (axe) in the Storybook panel.
 
 ## Tokens: Figma → CSS

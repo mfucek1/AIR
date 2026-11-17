@@ -1,0 +1,41 @@
+/* Skeleton — Figma component set "Skeleton" (Type). A slow pulse; still with reduced motion. */
+.air-skeleton {
+  display: block;
+  flex: none;
+  border-radius: var(--air-radius-full);
+  background: var(--air-bg-skeleton);
+  animation: air-skeleton-pulse 1.6s ease-in-out infinite;
+}
+
+.air-skeleton--text {
+  width: 160px;
+  height: 12px;
+}
+
+.air-skeleton--title {
+  width: 200px;
+  height: 16px;
+}
+
+.air-skeleton--circle {
+  width: 32px;
+  height: 32px;
+}
+
+.air-skeleton--block {
+  width: 240px;
+  height: 96px;
+  border-radius: var(--air-radius-md);
+}
+
+@keyframes air-skeleton-pulse {
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .air-skeleton {
+    animation: none;
+  }
+}

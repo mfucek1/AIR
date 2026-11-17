@@ -1,0 +1,142 @@
+/* Banner — Figma component set "Banner" (Tone × Layout × Emphasis). */
+.air-banner {
+  --banner-bg: var(--air-bg-sunken);
+  --banner-border: var(--air-border-subtle);
+  --banner-bg-medium: var(--air-tag-bg-strong);
+  --banner-bg-strong: var(--air-tag-solid);
+  --banner-icon: var(--air-icon-muted);
+
+  display: flex;
+  align-items: flex-start;
+  gap: var(--air-space-12);
+  padding: var(--air-space-12) var(--air-space-12) var(--air-space-12) var(--air-space-16);
+  border: var(--air-stroke-default) solid var(--banner-border);
+  border-radius: var(--air-radius-md);
+  background: var(--banner-bg);
+  color: var(--air-text-primary);
+}
+
+.air-banner--info {
+  --banner-bg: var(--air-info-bg);
+  --banner-border: var(--air-info-border);
+  --banner-bg-medium: var(--air-info-bg-strong);
+  --banner-bg-strong: var(--air-info-solid);
+  --banner-icon: var(--air-icon-action);
+}
+
+.air-banner--success {
+  --banner-bg: var(--air-success-bg);
+  --banner-border: var(--air-success-border);
+  --banner-bg-medium: var(--air-success-bg-strong);
+  --banner-bg-strong: var(--air-success-solid);
+  --banner-icon: var(--air-success-icon);
+}
+
+.air-banner--warning {
+  --banner-bg: var(--air-warning-bg);
+  --banner-border: var(--air-warning-border);
+  --banner-bg-medium: var(--air-warning-bg-strong);
+  --banner-bg-strong: var(--air-warning-solid);
+  --banner-icon: var(--air-warning-icon);
+}
+
+.air-banner--danger {
+  --banner-bg: var(--air-danger-bg);
+  --banner-border: var(--air-danger-border);
+  --banner-bg-medium: var(--air-danger-bg-strong);
+  --banner-bg-strong: var(--air-danger-solid);
+  --banner-icon: var(--air-danger-icon);
+}
+
+.air-banner--ai {
+  --banner-bg: var(--air-ai-bg);
+  --banner-border: var(--air-ai-border);
+  --banner-bg-medium: var(--air-ai-bg-strong);
+  --banner-bg-strong: var(--air-ai-solid);
+  --banner-icon: var(--air-ai-icon);
+}
+
+.air-banner--medium {
+  border-color: transparent;
+  background: var(--banner-bg-medium);
+}
+
+.air-banner--strong {
+  border-color: transparent;
+  background: var(--banner-bg-strong);
+  color: var(--air-text-inverse);
+}
+
+.air-banner__icon {
+  flex: none;
+  color: var(--banner-icon);
+}
+
+.air-banner--strong .air-banner__icon {
+  color: var(--air-icon-inverse);
+}
+
+.air-banner__content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--air-space-2);
+  min-width: 0;
+}
+
+.air-banner__title,
+.air-banner__description {
+  margin: 0;
+}
+
+.air-banner__title {
+  font: var(--air-font-body-m-strong);
+  letter-spacing: var(--air-tracking-body-m-strong);
+}
+
+.air-banner__description {
+  color: var(--air-text-secondary);
+  font: var(--air-font-body-s);
+  letter-spacing: var(--air-tracking-body-s);
+}
+
+.air-banner--strong .air-banner__description {
+  color: var(--air-text-inverse);
+}
+
+.air-banner__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--air-space-8);
+  padding-top: var(--air-space-8);
+}
+
+/* On a solid fill the ghost action and the dismiss turn white, with a white wash on hover. */
+.air-banner--strong .air-button--ghost {
+  --button-fg: var(--air-text-inverse);
+  --button-icon: var(--air-icon-inverse);
+  --button-bg-hover: color-mix(in srgb, var(--air-text-inverse) 16%, transparent);
+  --button-bg-pressed: color-mix(in srgb, var(--air-text-inverse) 24%, transparent);
+}
+
+.air-banner--strong .air-banner__dismiss {
+  --ib-fg: var(--air-icon-inverse);
+  --ib-bg-hover: color-mix(in srgb, var(--air-text-inverse) 16%, transparent);
+  --ib-bg-pressed: color-mix(in srgb, var(--air-text-inverse) 24%, transparent);
+}
+
+/* Compact: one row, the title in Title/S. */
+.air-banner--compact {
+  align-items: center;
+  padding: var(--air-space-8) var(--air-space-12) var(--air-space-8) var(--air-space-16);
+}
+
+.air-banner--compact .air-banner__title {
+  font: var(--air-font-title-s);
+  letter-spacing: var(--air-tracking-title-s);
+}
+
+.air-banner--compact .air-banner__actions {
+  flex: none;
+  padding-top: 0;
+}

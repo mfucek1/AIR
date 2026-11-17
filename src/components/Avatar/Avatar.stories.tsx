@@ -6,7 +6,7 @@ import ribar from '../../assets/logos/ribar-analytics.svg';
 import northfold from '../../assets/logos/northfold.svg';
 
 const meta = {
-  title: 'Components/Avatar',
+  title: 'Components/Data display/Avatar',
   component: Avatar,
   args: { name: 'Mate Plate', size: 'm' },
 } satisfies Meta<typeof Avatar>;

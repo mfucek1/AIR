@@ -1,0 +1,90 @@
+/* Tooltip — Figma component set "Tooltip" (Placement). */
+.air-tooltip-anchor {
+  position: relative;
+  display: inline-flex;
+}
+
+.air-tooltip {
+  --tooltip-gap: 5px; /* the arrow's height */
+  position: absolute;
+  z-index: 10;
+  padding: var(--air-space-4) var(--air-space-8);
+  border-radius: var(--air-radius-sm);
+  background: var(--air-bg-inverse);
+  color: var(--air-text-inverse);
+  font: var(--air-font-body-s);
+  letter-spacing: var(--air-tracking-body-s);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 100ms ease-out, visibility 0s linear 100ms;
+}
+
+.air-tooltip[data-open] {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 100ms ease-out;
+}
+
+/* The arrow: a 10 × 5 triangle in the bubble's fill. */
+.air-tooltip::after {
+  content: '';
+  position: absolute;
+  border: 5px solid transparent;
+}
+
+.air-tooltip--top {
+  bottom: calc(100% + var(--tooltip-gap));
+  left: 50%;
+  translate: -50% 0;
+}
+.air-tooltip--top::after {
+  top: 100%;
+  left: 50%;
+  translate: -50% 0;
+  border-top-color: var(--air-bg-inverse);
+}
+
+.air-tooltip--bottom {
+  top: calc(100% + var(--tooltip-gap));
+  left: 50%;
+  translate: -50% 0;
+}
+.air-tooltip--bottom::after {
+  bottom: 100%;
+  left: 50%;
+  translate: -50% 0;
+  border-bottom-color: var(--air-bg-inverse);
+}
+
+.air-tooltip--left {
+  right: calc(100% + var(--tooltip-gap));
+  top: 50%;
+  translate: 0 -50%;
+}
+.air-tooltip--left::after {
+  left: 100%;
+  top: 50%;
+  translate: 0 -50%;
+  border-left-color: var(--air-bg-inverse);
+}
+
+.air-tooltip--right {
+  left: calc(100% + var(--tooltip-gap));
+  top: 50%;
+  translate: 0 -50%;
+}
+.air-tooltip--right::after {
+  right: 100%;
+  top: 50%;
+  translate: 0 -50%;
+  border-right-color: var(--air-bg-inverse);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .air-tooltip,
+  .air-tooltip[data-open] {
+    transition: none;
+  }
+}

@@ -1,0 +1,81 @@
+/* Tabs — Figma component set "Tab" (State), in a row with a border under it. */
+.air-tabs__list {
+  display: flex;
+  gap: var(--air-space-4);
+  border-bottom: var(--air-stroke-default) solid var(--air-border-subtle);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.air-tab {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  gap: var(--air-space-8);
+  height: var(--air-size-control-md);
+  padding: 0 var(--air-space-12);
+  border: none;
+  border-radius: var(--air-radius-xs);
+  background: none;
+  color: var(--air-text-secondary);
+  font: var(--air-font-body-m-strong);
+  letter-spacing: var(--air-tracking-body-m-strong);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.air-tab__icon {
+  flex: none;
+  color: var(--air-icon-muted);
+}
+
+/* Indicator: 2 px along the bottom edge. */
+.air-tab::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: transparent;
+}
+
+.air-tab:hover {
+  color: var(--air-text-primary);
+}
+
+.air-tab:hover .air-tab__icon {
+  color: var(--air-icon-default);
+}
+
+.air-tab:hover::after {
+  background: var(--air-border-strong);
+}
+
+.air-tab[aria-selected='true'] {
+  color: var(--air-text-primary);
+}
+
+.air-tab[aria-selected='true'] .air-tab__icon {
+  color: var(--air-icon-action);
+}
+
+.air-tab[aria-selected='true']::after {
+  background: var(--air-action-primary);
+}
+
+.air-tab:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 var(--air-stroke-focus) var(--air-border-focus);
+}
+
+.air-tabs__panel {
+  padding-top: var(--air-space-16);
+}
+
+.air-tabs__panel:focus-visible {
+  outline: none;
+  box-shadow: var(--air-effect-focus-ring);
+}

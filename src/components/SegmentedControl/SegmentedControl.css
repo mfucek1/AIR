@@ -1,0 +1,56 @@
+/* Segmented control — Figma component sets "Segmented control" and "Segment" (State). */
+.air-segmented {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--air-space-2);
+  height: var(--air-size-control-sm);
+  padding: var(--air-space-2);
+  border-radius: var(--air-radius-sm);
+  background: var(--air-bg-sunken);
+}
+
+.air-segment {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--air-space-4);
+  height: 28px;
+  padding: 0 var(--air-space-12);
+  border: none;
+  border-radius: var(--air-radius-xs);
+  background: transparent;
+  color: var(--air-text-secondary);
+  font: var(--air-font-body-m-strong);
+  letter-spacing: var(--air-tracking-body-m-strong);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.air-segment[aria-label] {
+  padding: 0 var(--air-space-8);
+}
+
+.air-segment__icon {
+  flex: none;
+  color: var(--air-icon-muted);
+}
+
+.air-segment:hover {
+  color: var(--air-text-primary);
+}
+
+.air-segment:hover .air-segment__icon,
+.air-segment[aria-checked='true'] .air-segment__icon {
+  color: var(--air-icon-default);
+}
+
+.air-segment[aria-checked='true'] {
+  background: var(--air-bg-surface-raised);
+  box-shadow: var(--air-effect-elevation-1);
+  color: var(--air-text-primary);
+}
+
+.air-segment:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 var(--air-stroke-focus) var(--air-border-focus);
+}

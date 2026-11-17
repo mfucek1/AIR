@@ -1,0 +1,83 @@
+/* Toast — Figma component set "Toast" (Tone × Inverse × Layout). Inverse switches to the Dark theme tokens. */
+.air-toast {
+  --toast-icon: var(--air-icon-action);
+
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--air-space-12);
+  width: 360px;
+  max-width: 100%;
+  padding: var(--air-space-12) var(--air-space-48) var(--air-space-12) var(--air-space-16);
+  border: var(--air-stroke-default) solid var(--air-border-subtle);
+  border-radius: var(--air-radius-md);
+  background: var(--air-bg-surface-raised);
+  box-shadow: var(--air-effect-elevation-2);
+  color: var(--air-text-primary);
+}
+
+.air-toast--success { --toast-icon: var(--air-success-icon); }
+.air-toast--warning { --toast-icon: var(--air-warning-icon); }
+.air-toast--danger { --toast-icon: var(--air-danger-icon); }
+.air-toast--ai { --toast-icon: var(--air-ai-icon); }
+
+.air-toast__icon {
+  flex: none;
+  color: var(--toast-icon);
+}
+
+.air-toast__content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--air-space-2);
+  min-width: 0;
+}
+
+.air-toast__title,
+.air-toast__description {
+  margin: 0;
+}
+
+.air-toast__title {
+  font: var(--air-font-body-m-strong);
+  letter-spacing: var(--air-tracking-body-m-strong);
+}
+
+.air-toast__description {
+  color: var(--air-text-secondary);
+  font: var(--air-font-body-s);
+  letter-spacing: var(--air-tracking-body-s);
+}
+
+.air-toast__actions {
+  padding-top: var(--air-space-8);
+}
+
+.air-toast__close {
+  position: absolute;
+  top: 6px;
+  right: var(--air-space-8);
+}
+
+/* Bar: one line, close in the flow. */
+.air-toast--bar {
+  align-items: center;
+  width: auto;
+  padding: var(--air-space-8) var(--air-space-8) var(--air-space-8) var(--air-space-16);
+}
+
+.air-toast--bar .air-toast__content {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--air-space-2) var(--air-space-8);
+}
+
+.air-toast--bar .air-toast__actions {
+  padding: 0 0 0 var(--air-space-8);
+}
+
+.air-toast--bar .air-toast__close {
+  position: static;
+}

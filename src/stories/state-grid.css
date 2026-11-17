@@ -1,0 +1,28 @@
+.air-state-grid {
+  border-collapse: collapse;
+  font: var(--air-font-body-m);
+  color: var(--air-text-primary);
+}
+
+.air-state-grid caption {
+  padding-bottom: var(--air-space-8);
+  font: var(--air-font-body-m-strong);
+  text-align: left;
+}
+
+.air-state-grid th {
+  padding: var(--air-space-8) var(--air-space-24) var(--air-space-8) 0;
+  font: var(--air-font-body-s);
+  color: var(--air-text-secondary);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.air-state-grid td {
+  padding: var(--air-space-12) var(--air-space-24) var(--air-space-12) 0;
+  vertical-align: middle;
+}
+
+.air-state-grid--top td {
+  vertical-align: top;
+}

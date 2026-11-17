@@ -1,0 +1,38 @@
+/* Select — Figma component set "Select". A styled native select; the box is in Field.css. */
+.air-select {
+  --chevron: 20px;
+  padding-right: var(--air-space-12);
+  cursor: pointer;
+}
+
+.air-select.air-field-box--s {
+  --chevron: 16px;
+}
+
+.air-select__icon {
+  flex: none;
+}
+
+/* The select runs under the chevron, so a click there opens it too. */
+.air-select__control {
+  align-self: stretch;
+  margin-right: calc(-1 * (var(--chevron) + var(--air-space-8)));
+  padding-right: calc(var(--chevron) + var(--air-space-8));
+  appearance: none;
+  cursor: pointer;
+}
+
+/* The empty first option reads as a placeholder. */
+.air-select__control:has(option[data-placeholder]:checked) {
+  color: var(--air-text-muted);
+}
+
+.air-select__control option {
+  color: var(--air-text-primary);
+}
+
+.air-select__chevron {
+  position: relative;
+  flex: none;
+  pointer-events: none;
+}

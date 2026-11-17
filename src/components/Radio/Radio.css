@@ -1,0 +1,115 @@
+/* Radio — Figma component set "Radio" (Checked × State). */
+.air-radio {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--air-space-8);
+  color: var(--air-text-primary);
+  font: var(--air-font-body-m);
+  letter-spacing: var(--air-tracking-body-m);
+  cursor: pointer;
+}
+
+.air-radio__input {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  opacity: 0;
+  cursor: inherit;
+}
+
+.air-radio__circle {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border: var(--air-stroke-default) solid var(--air-border-input);
+  border-radius: var(--air-radius-full);
+  background: var(--air-bg-surface);
+}
+
+/* The 6 px dot. */
+.air-radio__circle::after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: var(--air-radius-full);
+  background: var(--air-icon-inverse);
+  scale: 0;
+}
+
+.air-radio:hover .air-radio__circle {
+  border-color: var(--air-border-input-hover);
+}
+
+.air-radio__input:checked + .air-radio__circle {
+  border-color: transparent;
+  background: var(--air-action-primary);
+}
+
+.air-radio__input:checked + .air-radio__circle::after {
+  scale: 1;
+}
+
+.air-radio:hover .air-radio__input:checked + .air-radio__circle {
+  background: var(--air-action-primary-hover);
+}
+
+.air-radio__input:focus-visible + .air-radio__circle {
+  box-shadow: var(--air-effect-focus-ring);
+}
+
+.air-radio:has(.air-radio__input:disabled) {
+  color: var(--air-text-disabled);
+  cursor: not-allowed;
+}
+
+.air-radio .air-radio__input:disabled + .air-radio__circle {
+  border-color: var(--air-border-subtle);
+  background: var(--air-bg-sunken);
+}
+
+.air-radio .air-radio__input:disabled:checked + .air-radio__circle {
+  border-color: transparent;
+  background: var(--air-action-disabled);
+}
+
+.air-radio__input:disabled:checked + .air-radio__circle::after {
+  background: var(--air-text-disabled);
+}
+
+/* Group */
+.air-radio-group {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.air-radio-group__legend {
+  margin-bottom: var(--air-space-8);
+  padding: 0;
+  color: var(--air-text-primary);
+  font: var(--air-font-body-m-strong);
+  letter-spacing: var(--air-tracking-body-m-strong);
+}
+
+.air-radio-group__options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--air-space-8);
+}
+
+.air-radio-group--horizontal .air-radio-group__options {
+  flex-flow: row wrap;
+  gap: var(--air-space-8) var(--air-space-24);
+}
+
+.air-radio-group:disabled .air-radio-group__legend {
+  color: var(--air-text-disabled);
+}

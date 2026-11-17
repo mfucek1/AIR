@@ -1,0 +1,10 @@
+/* Textarea — Figma component set "Textarea". The box is in Field.css; this sets the padding and resizing. */
+.air-textarea {
+  align-items: stretch;
+  padding: var(--air-space-8) var(--air-space-12);
+}
+
+.air-textarea .air-field-control {
+  min-height: 80px;
+  resize: vertical;
+}

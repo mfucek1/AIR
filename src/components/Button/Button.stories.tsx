@@ -3,7 +3,7 @@ import { ChevronDown, Plus, Trash2, UserPlus } from 'lucide-react';
 import { Button } from './Button';
 
 const meta = {
-  title: 'Components/Button',
+  title: 'Components/Actions/Button',
   component: Button,
   args: { children: 'Add candidate', variant: 'primary', tone: 'default', size: 'm', disabled: false },
   argTypes: {

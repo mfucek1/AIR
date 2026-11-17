@@ -1,0 +1,87 @@
+/* Switch — Figma component set "Switch" (Value × State). */
+.air-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--air-space-8);
+  color: var(--air-text-primary);
+  font: var(--air-font-body-m);
+  letter-spacing: var(--air-tracking-body-m);
+  cursor: pointer;
+}
+
+.air-switch__input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 20px;
+  margin: 0;
+  opacity: 0;
+  cursor: inherit;
+}
+
+.air-switch__track {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  width: 36px;
+  height: 20px;
+  padding: var(--air-space-2);
+  border-radius: var(--air-radius-full);
+  background: var(--air-border-input);
+  transition: background-color 150ms ease-out;
+}
+
+.air-switch__knob {
+  width: 16px;
+  height: 16px;
+  border-radius: var(--air-radius-full);
+  background: var(--air-action-knob);
+  box-shadow: var(--air-effect-elevation-1);
+  transition: translate 150ms ease-out;
+}
+
+.air-switch:hover .air-switch__track {
+  background: var(--air-border-input-hover);
+}
+
+.air-switch__input:checked + .air-switch__track {
+  background: var(--air-action-primary);
+}
+
+.air-switch:hover .air-switch__input:checked + .air-switch__track {
+  background: var(--air-action-primary-hover);
+}
+
+.air-switch__input:checked + .air-switch__track .air-switch__knob {
+  translate: 16px 0;
+}
+
+.air-switch__input:focus-visible + .air-switch__track {
+  box-shadow: var(--air-effect-focus-ring);
+}
+
+.air-switch:has(.air-switch__input:disabled) {
+  color: var(--air-text-disabled);
+  cursor: not-allowed;
+}
+
+.air-switch .air-switch__input:disabled + .air-switch__track {
+  opacity: 0.4;
+}
+
+.air-switch:hover .air-switch__input:disabled:not(:checked) + .air-switch__track {
+  background: var(--air-border-input);
+}
+
+.air-switch:hover .air-switch__input:disabled:checked + .air-switch__track {
+  background: var(--air-action-primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .air-switch__track,
+  .air-switch__knob {
+    transition: none;
+  }
+}

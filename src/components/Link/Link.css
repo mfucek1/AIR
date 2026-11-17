@@ -1,0 +1,67 @@
+/* Link — Figma component set "Link" (Type × Size × State). Hover swaps Body to the underlined Link style. */
+.air-link {
+  --link-fg: var(--air-text-link);
+  --link-fg-hover: var(--air-text-link);
+  --link-icon: var(--air-icon-action);
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--air-space-4);
+  padding: 0;
+  border: none;
+  border-radius: var(--air-radius-xs);
+  background: none;
+  color: var(--link-fg);
+  font: var(--air-font-body-m-strong);
+  letter-spacing: var(--air-tracking-body-m-strong);
+  text-decoration: none;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.air-link--s {
+  font: var(--air-font-body-s);
+  letter-spacing: var(--air-tracking-body-s);
+}
+
+.air-link__icon {
+  flex: none;
+  color: var(--link-icon);
+}
+
+.air-link:hover:not(:disabled, [aria-disabled]) {
+  color: var(--link-fg-hover);
+  text-decoration: underline;
+}
+
+.air-link--m:hover:not(:disabled, [aria-disabled]) {
+  font: var(--air-font-link-m);
+}
+
+.air-link--s:hover:not(:disabled, [aria-disabled]) {
+  font: var(--air-font-link-s);
+}
+
+.air-link:focus-visible {
+  outline: none;
+  box-shadow: var(--air-effect-focus-ring);
+}
+
+.air-link--neutral {
+  --link-fg: var(--air-text-secondary);
+  --link-fg-hover: var(--air-text-primary);
+  --link-icon: var(--air-icon-default);
+}
+
+.air-link--danger {
+  --link-fg: var(--air-danger-text);
+  --link-fg-hover: var(--air-danger-text);
+  --link-icon: var(--air-danger-icon);
+}
+
+.air-link:disabled,
+.air-link[aria-disabled] {
+  --link-fg: var(--air-text-disabled);
+  --link-icon: var(--air-text-disabled);
+  cursor: not-allowed;
+}

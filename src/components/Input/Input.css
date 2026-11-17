@@ -1,0 +1,45 @@
+/* Input — Figma component sets "Input" and "Input action". The box itself is in Field.css. */
+.air-input__icon {
+  flex: none;
+}
+
+.air-input .air-field-control {
+  align-self: stretch;
+}
+
+.air-input-action {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: var(--air-space-4);
+  min-width: 24px;
+  height: 24px;
+  padding: var(--air-space-4);
+  border: none;
+  border-radius: var(--air-radius-sm);
+  background: transparent;
+  color: var(--air-icon-muted);
+  cursor: pointer;
+}
+
+.air-input-action:hover {
+  background: var(--air-bg-hover);
+  color: var(--air-icon-default);
+}
+
+.air-input-action:focus-visible {
+  outline: none;
+  box-shadow: var(--air-effect-focus-ring);
+}
+
+.air-input-action--active,
+.air-input-action--active:hover {
+  background: var(--air-bg-selected);
+  color: var(--air-icon-action);
+}
+
+.air-input-action__count {
+  color: var(--air-text-link);
+  font: var(--air-font-caption-strong);
+  letter-spacing: var(--air-tracking-caption-strong);
+}

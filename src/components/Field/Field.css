@@ -1,0 +1,145 @@
+/* Field — the label and helper rows of Input, Textarea and Select (Figma: Label row, Helper, Footer). */
+.air-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--air-space-4);
+  min-width: 0;
+}
+
+.air-field__label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--air-space-2);
+  color: var(--air-text-primary);
+  font: var(--air-font-body-m-strong);
+  letter-spacing: var(--air-tracking-body-m-strong);
+}
+
+.air-field--s .air-field__label {
+  font: var(--air-font-caption-strong);
+  letter-spacing: var(--air-tracking-caption-strong);
+}
+
+.air-field__required {
+  color: var(--air-danger-text);
+}
+
+.air-field__ai {
+  margin-left: var(--air-space-2);
+  color: var(--air-ai-icon);
+}
+
+.air-field__footer {
+  display: flex;
+  gap: var(--air-space-12);
+  justify-content: space-between;
+}
+
+.air-field__helper {
+  margin: 0;
+  color: var(--air-text-secondary);
+  font: var(--air-font-body-s);
+  letter-spacing: var(--air-tracking-body-s);
+}
+
+.air-field--s .air-field__helper {
+  font: var(--air-font-caption);
+  letter-spacing: var(--air-tracking-caption);
+}
+
+.air-field__counter {
+  margin-left: auto;
+  color: var(--air-text-muted);
+  font: var(--air-font-body-s);
+  font-variant-numeric: tabular-nums;
+}
+
+.air-field--error .air-field__helper {
+  color: var(--air-danger-text);
+}
+
+.air-field--disabled .air-field__label,
+.air-field--disabled .air-field__required,
+.air-field--disabled .air-field__helper,
+.air-field--disabled .air-field__counter {
+  color: var(--air-text-disabled);
+}
+
+/* The box: 1 px border-field at rest, border-input on hover, 2 px border-focus with focus inside. */
+.air-field-box {
+  --box-border: var(--air-border-field);
+  --box-ring: transparent;
+
+  display: flex;
+  align-items: center;
+  gap: var(--air-space-8);
+  min-width: 0;
+  min-height: var(--air-size-control-md);
+  padding: 0 var(--air-space-8) 0 var(--air-space-12);
+  border: var(--air-stroke-default) solid var(--box-border);
+  border-radius: var(--air-radius-sm);
+  background: var(--air-bg-surface);
+  box-shadow: inset 0 0 0 var(--air-stroke-default) var(--box-ring);
+  color: var(--air-icon-muted);
+  cursor: text;
+}
+
+.air-field-box--s {
+  min-height: var(--air-size-control-sm);
+}
+
+.air-field-box:hover {
+  --box-border: var(--air-border-input);
+}
+
+.air-field-box:focus-within {
+  --box-border: var(--air-border-focus);
+  --box-ring: var(--air-border-focus);
+}
+
+.air-field--error .air-field-box {
+  --box-border: var(--air-border-danger);
+}
+
+.air-field--error .air-field-box:focus-within {
+  --box-ring: var(--air-border-danger);
+}
+
+.air-field--disabled .air-field-box {
+  --box-border: var(--air-border-subtle);
+  background: var(--air-bg-sunken);
+  color: var(--air-text-disabled);
+  cursor: not-allowed;
+}
+
+/* The control inside the box: no border of its own. */
+.air-field-control {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--air-text-primary);
+  font: var(--air-font-body-m);
+  letter-spacing: var(--air-tracking-body-m);
+}
+
+.air-field-box--s .air-field-control {
+  font: var(--air-font-body-s);
+  letter-spacing: var(--air-tracking-body-s);
+}
+
+.air-field-control::placeholder {
+  color: var(--air-text-muted);
+  opacity: 1;
+}
+
+.air-field-control:disabled {
+  color: var(--air-text-disabled);
+  cursor: not-allowed;
+}
+
+.air-field-control:disabled::placeholder {
+  color: var(--air-text-disabled);
+}

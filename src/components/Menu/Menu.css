@@ -1,0 +1,105 @@
+/* Menu — Figma component sets "Menu", "Menu item" (Type × State) and "Divider". */
+.air-menu {
+  display: flex;
+  flex-direction: column;
+  width: 240px;
+  padding: var(--air-space-4);
+  border: var(--air-stroke-default) solid var(--air-border-subtle);
+  border-radius: var(--air-radius-md);
+  background: var(--air-bg-surface-raised);
+  box-shadow: var(--air-effect-elevation-2);
+}
+
+.air-menu .air-divider--horizontal {
+  margin: var(--air-space-4) 0;
+}
+
+.air-menu-item {
+  display: flex;
+  align-items: center;
+  gap: var(--air-space-8);
+  width: 100%;
+  min-height: var(--air-size-control-sm);
+  padding: 0 var(--air-space-8);
+  border: none;
+  border-radius: var(--air-radius-xs);
+  background: transparent;
+  color: var(--air-text-primary);
+  font: var(--air-font-body-m);
+  letter-spacing: var(--air-tracking-body-m);
+  text-align: left;
+  cursor: pointer;
+}
+
+.air-menu-item__icon {
+  flex: none;
+  color: var(--air-icon-muted);
+}
+
+.air-menu-item__label {
+  flex: 1;
+  min-width: 0;
+}
+
+.air-menu-item__shortcut {
+  color: var(--air-text-muted);
+  font: var(--air-font-body-s);
+}
+
+.air-menu-item__check {
+  flex: none;
+  color: var(--air-icon-action);
+}
+
+.air-menu-item:hover:not(:disabled),
+.air-menu-item:focus-visible {
+  outline: none;
+  background: var(--air-bg-hover);
+}
+
+.air-menu-item:hover .air-menu-item__icon,
+.air-menu-item--selected .air-menu-item__icon {
+  color: var(--air-icon-default);
+}
+
+.air-menu-item:focus-visible {
+  box-shadow: inset 0 0 0 var(--air-stroke-focus) var(--air-border-focus);
+}
+
+.air-menu-item--selected,
+.air-menu-item--selected:hover:not(:disabled) {
+  background: var(--air-bg-selected);
+}
+
+.air-menu-item--danger {
+  color: var(--air-danger-text);
+}
+
+.air-menu-item--danger .air-menu-item__icon,
+.air-menu-item--danger:hover .air-menu-item__icon {
+  color: var(--air-danger-icon);
+}
+
+.air-menu-item:disabled,
+.air-menu-item:disabled .air-menu-item__icon,
+.air-menu-item:disabled .air-menu-item__shortcut {
+  color: var(--air-text-disabled);
+  cursor: not-allowed;
+}
+
+/* Divider */
+.air-divider {
+  flex: none;
+  background: var(--air-border-subtle);
+}
+
+.air-divider--horizontal {
+  align-self: stretch;
+  height: 1px;
+}
+
+.air-divider--vertical {
+  align-self: stretch;
+  width: 1px;
+  min-height: 24px;
+}

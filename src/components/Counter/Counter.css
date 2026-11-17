@@ -1,0 +1,24 @@
+/* Counter — Figma component set "Counter" (Tone). */
+.air-counter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  padding: var(--air-space-2) var(--air-space-4);
+  border-radius: var(--air-radius-full);
+  background: var(--air-tag-bg);
+  color: var(--air-tag-text);
+  font: var(--air-font-caption-strong);
+  letter-spacing: var(--air-tracking-caption-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+.air-counter--brand {
+  background: var(--air-action-primary);
+  color: var(--air-text-on-action);
+}
+
+.air-counter--chrome {
+  background: var(--air-chrome-badge);
+  color: var(--air-chrome-badge-text);
+}

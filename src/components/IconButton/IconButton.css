@@ -1,0 +1,74 @@
+/* Icon button — Figma component set "Icon button" (Type × Size × State). */
+.air-icon-button {
+  --ib-bg: transparent;
+  --ib-bg-hover: var(--air-bg-hover);
+  --ib-bg-pressed: var(--air-bg-pressed);
+  --ib-fg: var(--air-icon-default);
+  --ib-border: transparent;
+
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--air-size-control-md);
+  height: var(--air-size-control-md);
+  padding: 0;
+  border: var(--air-stroke-default) solid var(--ib-border);
+  border-radius: var(--air-radius-sm);
+  background: var(--ib-bg);
+  color: var(--ib-fg);
+  cursor: pointer;
+  transition: background-color 100ms ease-out;
+}
+
+.air-icon-button--s {
+  width: var(--air-size-control-sm);
+  height: var(--air-size-control-sm);
+}
+
+.air-icon-button:hover:not(:disabled) {
+  background: var(--ib-bg-hover);
+}
+
+.air-icon-button:active:not(:disabled) {
+  background: var(--ib-bg-pressed);
+}
+
+.air-icon-button:focus-visible {
+  outline: none;
+  box-shadow: var(--air-effect-focus-ring);
+}
+
+.air-icon-button--secondary {
+  --ib-bg: var(--air-action-secondary);
+  --ib-bg-hover: var(--air-action-secondary-hover);
+  --ib-bg-pressed: var(--air-action-secondary-pressed);
+  --ib-border: var(--air-border-input);
+}
+
+.air-icon-button--primary {
+  --ib-bg: var(--air-action-primary);
+  --ib-bg-hover: var(--air-action-primary-hover);
+  --ib-bg-pressed: var(--air-action-primary-pressed);
+  --ib-fg: var(--air-icon-inverse);
+}
+
+.air-icon-button:disabled {
+  --ib-fg: var(--air-text-disabled);
+  cursor: not-allowed;
+}
+
+.air-icon-button--secondary:disabled,
+.air-icon-button--primary:disabled {
+  --ib-bg: var(--air-action-disabled);
+}
+
+.air-icon-button--secondary:disabled {
+  --ib-border: var(--air-border-subtle);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .air-icon-button {
+    transition: none;
+  }
+}

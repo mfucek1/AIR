@@ -1,0 +1,42 @@
+/* Avatar stack — Figma component set "Avatar stack" (Size). Each avatar sits in a 2 px surface ring and overlaps the last. */
+.air-avatar-stack {
+  --stack-overlap: var(--air-overlap-6);
+  --stack-avatar: var(--air-size-avatar-sm);
+
+  display: inline-flex;
+  align-items: center;
+}
+
+.air-avatar-stack--m {
+  --stack-overlap: var(--air-overlap-8);
+  --stack-avatar: var(--air-size-avatar-md);
+}
+
+.air-avatar-stack__ring {
+  display: inline-flex;
+  padding: var(--air-space-2);
+  border-radius: var(--air-radius-full);
+  background: var(--air-bg-surface);
+}
+
+.air-avatar-stack__ring + .air-avatar-stack__ring {
+  margin-left: var(--stack-overlap);
+}
+
+.air-avatar-stack__more {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--stack-avatar);
+  height: var(--stack-avatar);
+  border-radius: var(--air-radius-full);
+  background: var(--air-tag-bg);
+  color: var(--air-tag-text);
+  font: var(--air-font-caption-strong);
+  letter-spacing: var(--air-tracking-caption-strong);
+}
+
+.air-avatar-stack--m .air-avatar-stack__more {
+  font: var(--air-font-body-m-strong);
+  letter-spacing: var(--air-tracking-body-m-strong);
+}

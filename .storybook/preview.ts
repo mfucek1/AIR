@@ -10,7 +10,7 @@ const preview: Preview = {
     a11y: { test: 'error' },
     options: {
       storySort: {
-        order: ['Introduction', 'Foundations', ['Colour', 'Typography', 'Spacing', 'Radius', 'Elevation and focus'], 'Components'],
+        order: ['Introduction', 'Foundations', ['Colour', 'Typography', 'Spacing', 'Radius', 'Elevation and focus'], 'Components', ['Actions', 'Forms', 'Navigation', 'Feedback', 'Data display']],
       },
     },
   },

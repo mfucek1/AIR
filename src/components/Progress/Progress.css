@@ -1,0 +1,49 @@
+/* Progress — Figma component set "Progress" (Tone × Value). */
+.air-progress {
+  display: flex;
+  flex-direction: column;
+  gap: var(--air-space-4);
+  width: 240px;
+  max-width: 100%;
+}
+
+.air-progress__header {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--air-space-8);
+  font: var(--air-font-body-s);
+  letter-spacing: var(--air-tracking-body-s);
+}
+
+.air-progress__label {
+  color: var(--air-text-secondary);
+}
+
+.air-progress__value {
+  color: var(--air-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.air-progress__track {
+  height: 6px;
+  overflow: hidden;
+  border-radius: var(--air-radius-full);
+  background: var(--air-bg-sunken);
+}
+
+.air-progress__fill {
+  height: 100%;
+  border-radius: var(--air-radius-full);
+  background: var(--air-action-primary);
+  transition: width 200ms ease-out;
+}
+
+.air-progress--ai .air-progress__fill { background: var(--air-ai-icon); }
+.air-progress--success .air-progress__fill { background: var(--air-success-icon); }
+.air-progress--danger .air-progress__fill { background: var(--air-danger-icon); }
+
+@media (prefers-reduced-motion: reduce) {
+  .air-progress__fill {
+    transition: none;
+  }
+}

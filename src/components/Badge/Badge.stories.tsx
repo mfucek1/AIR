@@ -12,7 +12,7 @@ const sample: Record<BadgeTone, string> = {
 };
 
 const meta = {
-  title: 'Components/Badge',
+  title: 'Components/Data display/Badge',
   component: Badge,
   args: { children: 'Screening', tone: 'info', size: 's', inverse: false, showIcon: false },
 } satisfies Meta<typeof Badge>;
