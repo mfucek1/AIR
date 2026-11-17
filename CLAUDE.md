@@ -20,11 +20,11 @@ Storybook of AIR's components (an ATS), built in code from the AIR Figma file. L
 
 ## Figma to code page
 - `figma-to-code/`: a small Vite page, not a story. `npm run build` builds it into `storybook-static/figma-to-code/`, so it deploys with Storybook to air.markofucek.com/figma-to-code/. markofucek.com shows it in an iframe under Live components (design: the portfolio Figma file, "Component card · AIR · Figma to code", at 1440 and 390).
-- Nine steps, simple to complex, one tab each, the level named above its group (Figma: portfolio 🔮 Exploration, "simple to complex", option A): atoms Button, Badge, Tag, Avatar; molecules Avatar stack, Breadcrumbs; organisms Candidate card, Top bar; template Candidates page.
-- Left: the step as drawn in Figma (`drawn/`) and its rows from `figma-spec.ts` (the spec script's output, with the `SETS` and `BASE` noted there). Right: the real component (`live.tsx`) and the line of code for each row. Two kinds of row, both checked when the page loads (`rows.ts` throws on a mismatch):
-  - a variable bound in Figma beside the declaration in the component's stylesheet that uses it;
-  - from molecules up, first the parts it's built from (Figma instances, purple diamonds) beside the JSX line that places each, read from the component's source, the template, or `live.tsx` when the part fills a slot.
-- Wide steps render at their Figma width and are scaled down to fit, both sides alike, with the zoom in the corner; on narrow screens a page fits the width and the canvas crops its bottom. The template runs live as its own Storybook story in an iframe (1440 wide), so its landmarks stay its own.
+- Nine steps, simple to complex, one tab each, the level named above its group (Figma: portfolio 🔮 Exploration, "simple to complex", option A; the lineup Marko's, 17 Nov): atoms Button, Tag (removable), Switch; molecules Avatar stack, Segmented control, Select (with its leading icon, required mark and helper); organisms Menu, Top bar, Candidate card (List), the biggest, built from eight kinds of part.
+- Left: the step as drawn in Figma (`drawn/`) and its rows from `figma-spec.ts` (the spec script's output, with the `SETS` and `BASE` noted there; boolean properties a step turns on are listed in `rows.ts`). Right: the real component (`live.tsx`) and the line of code for each row. Two kinds of row, both checked when the page loads (`rows.ts` throws on a mismatch):
+  - a variable or style bound in Figma beside the declaration in the stylesheet that uses it (the component's own, or Field's for the Select's label, box and helper);
+  - from molecules up, first the parts it's built from (Figma instances, purple diamonds, with the properties all of them share) beside the JSX line that places each, read from the component's source or `live.tsx` when the part fills a slot.
+- Wide steps render at their Figma width and are scaled down to fit, both sides alike, with the zoom in the corner; on narrow screens one that would shrink too far fits the width and the canvas crops its bottom. Drawings with a shadow (Switch, Segmented control, Menu) keep the selection on the component's box, the shadow outside it.
 - Stage sizes: 680 tall side by side from 900 px wide; stacked under 900, four rows a side, 860 tall on the card. The canvases take whatever height the rows leave. The page's chrome uses the portfolio's flat palette; the components use AIR's tokens.
 - `npm run figma-to-code` serves it on port 6008 while editing.
 
@@ -44,7 +44,7 @@ Storybook of AIR's components (an ATS), built in code from the AIR Figma file. L
 2. `npm run build`.
 3. Accessibility: `scripts/a11y-check.mjs` runs axe on every story of the build (setup in the file). The only accepted hit is helper text under disabled fields (WCAG 1.4.3 exempts inactive components; field stories exclude disabled fields from Storybook's own check).
 4. Look at screenshots of every new or changed story, at desktop and phone widths.
-5. If `figma-to-code/` or a component it shows changed: axe and a look at every tab at 1198 × 680 and 356 × 860 (and 356 × 713 until the portfolio card's phone stage is 860 on live).
+5. If `figma-to-code/` or a component it shows changed: axe and a look at every tab at 1198 × 680 and 356 × 860.
 
 ## Deploy
 - Cloudflare Pages builds main to production (air.markofucek.com) and every other branch to `https://<branch>.air-8b2.pages.dev`.

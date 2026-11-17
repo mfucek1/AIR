@@ -13,7 +13,7 @@ export { Select, type SelectProps, type SelectOption } from './components/Select
 export { Checkbox, type CheckboxProps } from './components/Checkbox/Checkbox';
 export { Radio, RadioGroup, type RadioProps, type RadioGroupProps } from './components/Radio/Radio';
 export { Switch, type SwitchProps } from './components/Switch/Switch';
-export { SegmentedControl, type SegmentedControlProps, type Segment } from './components/SegmentedControl/SegmentedControl';
+export { SegmentedControl, Segment, type SegmentedControlProps, type SegmentProps, type SegmentItem } from './components/SegmentedControl/SegmentedControl';
 
 export { FilterChip, FilterOption, TagInput, type FilterChipProps, type FilterOptionProps, type TagInputProps } from './components/Filters/Filters';
 

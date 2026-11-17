@@ -2,31 +2,32 @@
 // - a variable bound in Figma (from figma-spec.ts) beside the CSS declaration that uses it, read
 //   from the component's own stylesheet;
 // - from molecules up, a part the step is built from (an instance in Figma) beside the line of
-//   code that places it, read from the component's own source, the template, or live.tsx where
-//   the part fills a slot.
+//   code that places it, read from the component's own source, or live.tsx where the part fills
+//   a slot.
 // If a stylesheet stops using the variable Figma binds, or a part isn't placed where the row says,
 // building the rows throws, so the page can't show a pair that doesn't match.
 import buttonCss from '../src/components/Button/Button.css?raw';
-import badgeCss from '../src/components/Badge/Badge.css?raw';
 import tagCss from '../src/components/Tag/Tag.css?raw';
-import avatarCss from '../src/components/Avatar/Avatar.css?raw';
+import switchCss from '../src/components/Switch/Switch.css?raw';
 import avatarStackCss from '../src/components/AvatarStack/AvatarStack.css?raw';
 import avatarStackTsx from '../src/components/AvatarStack/AvatarStack.tsx?raw';
-import breadcrumbsCss from '../src/components/Breadcrumbs/Breadcrumbs.css?raw';
-import breadcrumbsTsx from '../src/components/Breadcrumbs/Breadcrumbs.tsx?raw';
-import candidateCardCss from '../src/components/CandidateCard/CandidateCard.css?raw';
-import candidateCardTsx from '../src/components/CandidateCard/CandidateCard.tsx?raw';
+import segmentedCss from '../src/components/SegmentedControl/SegmentedControl.css?raw';
+import segmentedTsx from '../src/components/SegmentedControl/SegmentedControl.tsx?raw';
+import selectCss from '../src/components/Select/Select.css?raw';
+import selectTsx from '../src/components/Select/Select.tsx?raw';
+import fieldCss from '../src/components/Field/Field.css?raw';
+import menuCss from '../src/components/Menu/Menu.css?raw';
 import topBarCss from '../src/components/TopBar/TopBar.css?raw';
 import topBarTsx from '../src/components/TopBar/TopBar.tsx?raw';
-import candidatesPageCss from '../src/templates/CandidatesPage/CandidatesPage.css?raw';
-import candidatesPageTsx from '../src/templates/CandidatesPage/CandidatesPage.tsx?raw';
+import candidateCardCss from '../src/components/CandidateCard/CandidateCard.css?raw';
+import candidateCardTsx from '../src/components/CandidateCard/CandidateCard.tsx?raw';
 import liveTsx from './live.tsx?raw';
 import { specs, variables, type SpecNode } from './figma-spec';
 
 export type ComponentKey = keyof typeof specs;
 
 /** Where in the spec a variable row's value lives */
-type From = 'fill' | 'stroke' | 'text' | 'textStyle' | 'width' | 'height' | 'padding' | 'gap' | 'radius' | 'focusRing';
+type From = 'fill' | 'stroke' | 'text' | 'textStyle' | 'effect' | 'width' | 'height' | 'padding' | 'gap' | 'radius' | 'focusRing';
 
 interface VarDef {
   label: string;
@@ -36,6 +37,8 @@ interface VarDef {
   /** The CSS rule and property that carry it in code */
   rule: string;
   prop: string;
+  /** Another stylesheet than the step's own, like Field's for the Select's label and helper */
+  sheet?: 'field';
   /** Kept on phones and tablets, where each side shows four rows */
   phone?: boolean;
 }
@@ -47,13 +50,16 @@ interface PartDef {
   source: 'own' | 'live';
   /** Text that picks the line, when the part is placed more than once */
   find?: string;
+  /** The JSX tag, when it isn't the part's name (the Select's leading icon is <Leading>) */
+  jsx?: string;
   phone?: boolean;
 }
 
 export interface FigmaValue {
-  /** Variable code names (--air-…) or, for a text style, its name */
+  /** Variable code names (--air-…) */
   tokens: string[];
-  textStyle?: string;
+  /** Or a text or effect style's name */
+  style?: string;
 }
 
 export interface VarRow {
@@ -79,22 +85,30 @@ export type Row = VarRow | PartRow;
 
 const sheets: Record<ComponentKey, string> = {
   Button: buttonCss,
-  Badge: badgeCss,
   Tag: tagCss,
-  Avatar: avatarCss,
+  Switch: switchCss,
   'Avatar stack': avatarStackCss,
-  Breadcrumbs: breadcrumbsCss,
-  'Candidate card': candidateCardCss,
+  'Segmented control': segmentedCss,
+  Select: selectCss,
+  Menu: menuCss,
   'Top bar': topBarCss,
-  'Candidates page': candidatesPageCss,
+  'Candidate card': candidateCardCss,
 };
+
+const otherSheets = { field: fieldCss };
 
 const sources: Partial<Record<ComponentKey, string>> = {
   'Avatar stack': avatarStackTsx,
-  Breadcrumbs: breadcrumbsTsx,
-  'Candidate card': candidateCardTsx,
+  'Segmented control': segmentedTsx,
+  Select: selectTsx,
   'Top bar': topBarTsx,
-  'Candidates page': candidatesPageTsx,
+  'Candidate card': candidateCardTsx,
+};
+
+/** Boolean properties each step turns on in its drawing and live render; the layers they show count as visible */
+const turnedOn: Partial<Record<ComponentKey, string[]>> = {
+  Tag: ['Removable'],
+  Select: ['Show leading icon', 'Required', 'Show helper'],
 };
 
 const v = (label: string, from: From, rule: string, prop: string, more: Partial<VarDef> = {}): VarDef => ({ label, from, rule, prop, ...more });
@@ -112,15 +126,6 @@ const defs: Record<ComponentKey, (VarDef | PartDef)[]> = {
     v('Radius', 'radius', '.air-button', 'border-radius', { phone: true }),
     v('Focus ring', 'focusRing', '.air-button:focus-visible', 'box-shadow'),
   ],
-  Badge: [
-    v('Fill', 'fill', '.air-badge--success', '--badge-bg', { phone: true }),
-    v('Stroke', 'stroke', '.air-badge--success', '--badge-border', { phone: true }),
-    v('Label', 'text', '.air-badge--success', '--badge-fg', { phone: true }),
-    v('Text style', 'textStyle', '.air-badge--m', 'font'),
-    v('Padding', 'padding', '.air-badge', 'padding'),
-    v('Gap', 'gap', '.air-badge', 'gap'),
-    v('Radius', 'radius', '.air-badge', 'border-radius', { phone: true }),
-  ],
   Tag: [
     v('Fill', 'fill', '.air-tag', 'background', { phone: true }),
     v('Label', 'text', '.air-tag', 'color', { phone: true }),
@@ -128,15 +133,17 @@ const defs: Record<ComponentKey, (VarDef | PartDef)[]> = {
     v('Padding', 'padding', '.air-tag', 'padding', { phone: true }),
     v('Gap', 'gap', '.air-tag', 'gap'),
     v('Radius', 'radius', '.air-tag', 'border-radius', { phone: true }),
-    v('Focus ring', 'focusRing', 'button.air-tag:focus-visible', 'box-shadow'),
+    v('Focus ring', 'focusRing', '.air-tag__remove:focus-visible', 'box-shadow'),
   ],
-  Avatar: [
-    v('Fill', 'fill', '.air-avatar', 'background', { phone: true }),
-    v('Initials', 'text', '.air-avatar', 'color', { phone: true }),
-    v('Text style', 'textStyle', '.air-avatar--l', 'font'),
-    v('Width', 'width', '.air-avatar--l', 'width', { phone: true }),
-    v('Height', 'height', '.air-avatar--l', 'height'),
-    v('Radius', 'radius', '.air-avatar', 'border-radius', { phone: true }),
+  Switch: [
+    v('Track', 'fill', '.air-switch__input:checked + .air-switch__track', 'background', { layer: 'Track', phone: true }),
+    v('Knob', 'fill', '.air-switch__knob', 'background', { layer: 'Knob', phone: true }),
+    v('Knob shadow', 'effect', '.air-switch__knob', 'box-shadow', { layer: 'Knob' }),
+    v('Padding', 'padding', '.air-switch__track', 'padding', { layer: 'Track' }),
+    v('Radius', 'radius', '.air-switch__track', 'border-radius', { layer: 'Track', phone: true }),
+    v('Gap', 'gap', '.air-switch', 'gap'),
+    v('Label', 'text', '.air-switch', 'color', { phone: true }),
+    v('Focus ring', 'focusRing', '.air-switch__input:focus-visible + .air-switch__track', 'box-shadow', { layer: 'Track' }),
   ],
   // Molecules: a few atoms and a little layout
   'Avatar stack': [
@@ -146,22 +153,34 @@ const defs: Record<ComponentKey, (VarDef | PartDef)[]> = {
     v('Ring fill', 'fill', '.air-avatar-stack__ring', 'background', { layer: 'Avatar 1' }),
     v('Radius', 'radius', '.air-avatar-stack__ring', 'border-radius', { layer: 'Avatar 1', phone: true }),
   ],
-  Breadcrumbs: [
-    p('Link', 'own', { phone: true }),
-    p('Icon/chevron-right', 'own', { phone: true }),
-    v('Gap', 'gap', '.air-breadcrumbs__list', 'gap', { phone: true }),
-    v('Current', 'text', '.air-breadcrumbs__current', 'color', { phone: true }),
-    v('Text style', 'textStyle', '.air-breadcrumbs__current', 'font'),
+  'Segmented control': [
+    p('Segment', 'own', { phone: true }),
+    v('Fill', 'fill', '.air-segmented', 'background', { phone: true }),
+    v('Padding', 'padding', '.air-segmented', 'padding'),
+    v('Gap', 'gap', '.air-segmented', 'gap'),
+    v('Radius', 'radius', '.air-segmented', 'border-radius', { phone: true }),
+    v('Selected', 'fill', ".air-segment[aria-checked='true']", 'background', { layer: 'Segment 1', phone: true }),
+    v('Shadow', 'effect', ".air-segment[aria-checked='true']", 'box-shadow', { layer: 'Segment 1' }),
   ],
-  // Organisms: molecules and atoms with a job of their own
-  'Candidate card': [
-    p('Avatar', 'own', { find: '<Avatar size="m"', phone: true }),
-    p('Match grade', 'own', { phone: true }),
-    p('Tag', 'own', { phone: true }),
-    v('Fill', 'fill', '.air-candidate', 'background'),
-    v('Stroke', 'stroke', '.air-candidate', 'border'),
-    v('Radius', 'radius', '.air-candidate', 'border-radius', { phone: true }),
-    v('Padding', 'padding', '.air-candidate', 'padding'),
+  Select: [
+    p('Icon/briefcase', 'own', { jsx: 'Leading', phone: true }),
+    p('Icon/chevron-down', 'own'),
+    v('Label', 'textStyle', '.air-field__label', 'font', { layer: 'Label', sheet: 'field' }),
+    v('Required', 'text', '.air-field__required', 'color', { layer: 'Required', sheet: 'field', phone: true }),
+    v('Border', 'stroke', '.air-field-box', '--box-border', { layer: 'Field', sheet: 'field', phone: true }),
+    v('Height', 'height', '.air-field-box', 'min-height', { layer: 'Field', sheet: 'field' }),
+    v('Radius', 'radius', '.air-field-box', 'border-radius', { layer: 'Field', sheet: 'field' }),
+    v('Helper', 'text', '.air-field__helper', 'color', { layer: 'Helper', sheet: 'field', phone: true }),
+  ],
+  // Organisms: molecules and atoms with a job of their own, the last and biggest built from eight kinds of part
+  Menu: [
+    p('Menu item', 'live', { phone: true }),
+    p('Divider', 'live', { phone: true }),
+    v('Fill', 'fill', '.air-menu', 'background', { phone: true }),
+    v('Stroke', 'stroke', '.air-menu', 'border'),
+    v('Radius', 'radius', '.air-menu', 'border-radius'),
+    v('Padding', 'padding', '.air-menu', 'padding'),
+    v('Shadow', 'effect', '.air-menu', 'box-shadow', { phone: true }),
   ],
   'Top bar': [
     p('Breadcrumbs', 'live', { find: 'const breadcrumbs = <Breadcrumbs', phone: true }),
@@ -173,16 +192,20 @@ const defs: Record<ComponentKey, (VarDef | PartDef)[]> = {
     v('Padding', 'padding', '.air-top-bar', 'padding'),
     v('Gap', 'gap', '.air-top-bar', 'gap'),
   ],
-  // Template: organisms laid out as a page. Parts only, so the page gets room on the stage.
-  'Candidates page': [
-    p('Sidebar', 'own', { phone: true }),
-    p('Top bar', 'own', { phone: true }),
-    p('Page header', 'own', { phone: true }),
-    p('Candidate card', 'own', { phone: true }),
+  // Parts only: eight kinds, so the card gets room on the stage
+  'Candidate card': [
+    p('Avatar', 'own', { find: '<Avatar size="l"', phone: true }),
+    p('Link', 'own', { find: '{role && <Link' }),
+    p('Rating', 'own'),
+    p('Button', 'own', { find: 'tone="danger"', phone: true }),
+    p('Stage path', 'own', { phone: true }),
+    p('Badge', 'own'),
+    p('Tag', 'own', { find: '<Tag>{s}</Tag>', phone: true }),
+    p('Icon button', 'own', { find: 'LinkedIn' }),
   ],
 };
 
-const textNode = (spec: SpecNode) => spec.ch?.find((c) => c.k === 'Tex');
+const textNode = (spec: SpecNode) => (spec.k === 'Tex' ? spec : spec.ch?.find((c) => c.k === 'Tex'));
 const firstToken = (s: string | undefined) => s?.split(' ')[0];
 const isToken = (s: string | undefined): s is string => !!s && s !== '0' && s !== 'space-0' && !/^-?[\d.]+$/.test(s);
 
@@ -203,6 +226,7 @@ function figmaValue(spec: SpecNode, from: From): FigmaValue {
     stroke: () => [firstToken(spec.st)],
     text: () => [textNode(spec)?.c],
     textStyle: () => [],
+    effect: () => [],
     width: () => [sizes.w],
     height: () => [sizes.h],
     // p<top>/<right>/<bottom>/<left>: the distinct variables, in that order
@@ -211,16 +235,26 @@ function figmaValue(spec: SpecNode, from: From): FigmaValue {
     radius: () => [spec.r === undefined ? undefined : String(spec.r)],
     focusRing: () => [firstToken(spec.ch?.find((c) => c.n === 'Focus ring')?.st)],
   };
-  if (from === 'textStyle') return { tokens: [], textStyle: textNode(spec)?.ts };
+  if (from === 'textStyle') return { tokens: [], style: textNode(spec)?.ts };
+  if (from === 'effect') return { tokens: [], style: spec.fx };
   return { tokens: raw[from]().filter(isToken) };
 }
 
+/** Hidden in the base tree, and not shown by a property the step turns on */
+const hidden = (node: SpecNode, on: string[]) => !!node.hid && !on.some((prop) => node.pr?.split(',').includes(`v:${prop}`));
+
 /** Visible instances of a part, not counting ones inside hidden layers */
-function instances(node: SpecNode, part: string, out: SpecNode[] = []): SpecNode[] {
-  if (node.hid) return out;
+function instances(node: SpecNode, part: string, on: string[], out: SpecNode[] = []): SpecNode[] {
+  if (hidden(node, on)) return out;
   if (node.is && node.is.split(': ')[0] === part) out.push(node);
-  for (const c of node.ch ?? []) instances(c, part, out);
+  for (const c of node.ch ?? []) instances(c, part, on, out);
   return out;
+}
+
+/** The variant properties every instance shares, leaving out State */
+function commonProps(found: SpecNode[]) {
+  const lists = found.map((n) => (n.is!.split(': ')[1] ?? '').split(', ').filter((x) => x && !x.startsWith('State=')));
+  return lists[0].filter((x) => lists.every((l) => l.includes(x))).join(' · ');
 }
 
 /** "Match grade" → MatchGrade, "Icon/chevron-right" → ChevronRight */
@@ -245,19 +279,16 @@ function declaration(css: string, rule: string, prop: string) {
 }
 
 /** The code variable a row's value should use: the Figma variable, its text style, or the focus ring effect */
+const slug = (style = '') => style.toLowerCase().replace(/[/\s]+/g, '-');
 const expected = (def: VarDef, f: FigmaValue) =>
-  def.from === 'textStyle'
-    ? [`font-${(f.textStyle ?? '').toLowerCase().replace(/[/\s]+/g, '-')}`]
-    : def.from === 'focusRing'
-      ? ['effect-focus-ring']
-      : f.tokens;
+  def.from === 'textStyle' ? [`font-${slug(f.style)}`] : def.from === 'effect' ? [`effect-${slug(f.style)}`] : def.from === 'focusRing' ? ['effect-focus-ring'] : f.tokens;
 
 function varRow(key: ComponentKey, root: SpecNode, def: VarDef): VarRow {
   const node = def.layer ? findLayer(root, def.layer) : root;
   if (!node) throw new Error(`Figma to code: ${key} has no layer "${def.layer}"`);
   const figma = figmaValue(node, def.from);
-  if (!figma.tokens.length && !figma.textStyle) throw new Error(`Figma to code: ${key} ${def.label} has no variable in Figma`);
-  const css = declaration(sheets[key], def.rule, def.prop);
+  if (!figma.tokens.length && !figma.style) throw new Error(`Figma to code: ${key} ${def.label} has no variable or style in Figma`);
+  const css = declaration(def.sheet ? otherSheets[def.sheet] : sheets[key], def.rule, def.prop);
   for (const token of expected(def, figma)) {
     if (!css.value.includes(`var(--air-${token})`)) throw new Error(`Figma to code: ${key} ${def.label} is ${token} in Figma, "${css.value}" in code`);
   }
@@ -265,20 +296,15 @@ function varRow(key: ComponentKey, root: SpecNode, def: VarDef): VarRow {
 }
 
 function partRow(key: ComponentKey, root: SpecNode, def: PartDef, first: boolean): PartRow {
-  const found = instances(root, def.part);
+  const found = instances(root, def.part, turnedOn[key] ?? []);
   if (!found.length) throw new Error(`Figma to code: ${key} isn't built from ${def.part} in Figma`);
-  const props = found[0]
-    .is!.split(': ')[1]
-    ?.split(', ')
-    .filter((x) => x !== 'State=Default')
-    .join(' · ');
   const source = def.source === 'live' ? liveTsx : sources[key];
-  const tag = `<${jsxName(def.part)}`;
+  const tag = `<${def.jsx ?? jsxName(def.part)}`;
   // A JSX tag, so a type like NonNullable<CandidateCardProps> doesn't count
   const placed = new RegExp(`${tag}[\\s/>]`);
   const line = source?.split('\n').find((l) => placed.test(l) && (!def.find || l.includes(def.find)));
   if (!line) throw new Error(`Figma to code: ${key} doesn't place ${tag} in code`);
-  return { kind: 'part', label: first ? 'Built from' : '', part: { name: def.part, props: props || undefined, count: found.length }, code: line.trim(), phone: !!def.phone };
+  return { kind: 'part', label: first ? 'Built from' : '', part: { name: def.part, props: commonProps(found) || undefined, count: found.length }, code: line.trim(), phone: !!def.phone };
 }
 
 export function rowsFor(key: ComponentKey): Row[] {

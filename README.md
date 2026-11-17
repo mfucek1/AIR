@@ -18,7 +18,7 @@ Design and build by [Marko Fuček](https://markofucek.com). Figma first, built w
 
   Still to come: date picker, file upload, money and phone inputs, quick fill, the video pre-screening set, document viewer, rich text editor, audio recorder.
 - **Templates:** Candidates page (Sidebar, Top bar, Page header and Candidate cards).
-- **Figma to code** ([air.markofucek.com/figma-to-code/](https://air.markofucek.com/figma-to-code/)): nine steps from atoms to a page template (Button, Badge, Tag, Avatar; Avatar stack, Breadcrumbs; Candidate card, Top bar; Candidates page), each as drawn in Figma beside the React component, with a line of code for every variable and every part it's built from.
+- **Figma to code** ([air.markofucek.com/figma-to-code/](https://air.markofucek.com/figma-to-code/)): nine steps from atoms to organisms (Button, removable Tag, Switch; Avatar stack, Segmented control, Select; Menu, Top bar, Candidate card), each as drawn in Figma beside the React component, with a line of code for every variable and every part it's built from.
 - **Checks:** every story runs an accessibility check (axe) in the Storybook panel.
 
 ## Tokens: Figma → CSS

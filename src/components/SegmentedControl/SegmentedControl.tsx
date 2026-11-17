@@ -1,8 +1,8 @@
-import { useRef, useState, type KeyboardEvent } from 'react';
+import { useRef, useState, type ButtonHTMLAttributes, type KeyboardEvent, type Ref } from 'react';
 import type { LucideIcon } from 'lucide-react';
 import './SegmentedControl.css';
 
-export interface Segment {
+export interface SegmentItem {
   value: string;
   label: string;
   icon?: LucideIcon;
@@ -12,7 +12,7 @@ export interface Segment {
 
 export interface SegmentedControlProps {
   /** 2 to 4 segments. */
-  segments: Segment[];
+  segments: SegmentItem[];
   /** Names the control for screen readers, like "View". */
   label: string;
   value?: string;
@@ -51,27 +51,35 @@ export function SegmentedControl({ segments, label, value, defaultValue, onChang
     <div role="radiogroup" aria-label={label} className={['air-segmented', className].filter(Boolean).join(' ')}>
       {segments.map((s, i) => {
         const checked = s.value === current;
-        const Icon = s.icon;
         return (
-          <button
-            key={s.value}
-            ref={(el) => {
-              refs.current[i] = el;
-            }}
-            type="button"
-            role="radio"
-            aria-checked={checked}
-            aria-label={s.iconOnly ? s.label : undefined}
-            tabIndex={checked ? 0 : -1}
-            className="air-segment"
-            onClick={() => select(s.value)}
-            onKeyDown={(e) => onKeyDown(e, i)}
-          >
-            {Icon && <Icon className="air-segment__icon" size={16} aria-hidden="true" />}
-            {!s.iconOnly && <span>{s.label}</span>}
-          </button>
+          <Segment key={s.value} label={s.label} icon={s.icon} iconOnly={s.iconOnly} checked={checked} onClick={() => select(s.value)} onKeyDown={(e) => onKeyDown(e, i)} ref={(el) => void (refs.current[i] = el)} />
         );
       })}
     </div>
+  );
+}
+
+export interface SegmentProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'value'>, Omit<SegmentItem, 'value'> {
+  /** The selected segment. Figma: State=Selected. */
+  checked: boolean;
+  ref?: Ref<HTMLButtonElement>;
+}
+
+/** One option in a Segmented control: a radio, with an icon, a label or both. Figma: Segment. */
+export function Segment({ label, icon: Icon, iconOnly, checked, ref, ...rest }: SegmentProps) {
+  return (
+    <button
+      ref={ref}
+      type="button"
+      role="radio"
+      aria-checked={checked}
+      aria-label={iconOnly ? label : undefined}
+      tabIndex={checked ? 0 : -1}
+      className="air-segment"
+      {...rest}
+    >
+      {Icon && <Icon className="air-segment__icon" size={16} aria-hidden="true" />}
+      {!iconOnly && <span>{label}</span>}
+    </button>
   );
 }

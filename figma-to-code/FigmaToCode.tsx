@@ -1,26 +1,34 @@
 import { useLayoutEffect, useRef, useState, type KeyboardEvent, type ReactNode, type RefObject } from 'react';
 import { specs } from './figma-spec';
-import { LiveAvatar, LiveAvatarStack, LiveBadge, LiveBreadcrumbs, LiveButton, LiveCandidateCard, LiveCandidatesPage, LiveTag, LiveTopBar } from './live';
+import { LiveAvatarStack, LiveButton, LiveCandidateCard, LiveMenu, LiveSegmentedControl, LiveSelect, LiveSwitch, LiveTag, LiveTopBar } from './live';
 import { rowsFor, swatch, variableLabel, type ComponentKey, type PartRow, type Row, type VarRow } from './rows';
 import buttonSvg from './drawn/button.svg';
-import badgeSvg from './drawn/badge.svg';
-import tagSvg from './drawn/tag.svg';
-import avatarSvg from './drawn/avatar.svg';
+import tagPng from './drawn/tag-removable@2x.png';
+import switchPng from './drawn/switch@2x.png';
 import avatarStackSvg from './drawn/avatar-stack.svg';
-import breadcrumbsPng from './drawn/breadcrumbs@2x.png';
-import candidateCardPng from './drawn/candidate-card@2x.png';
+import segmentedPng from './drawn/segmented-control@2x.png';
+import selectPng from './drawn/select@2x.png';
+import menuPng from './drawn/menu@2x.png';
 import topBarPng from './drawn/top-bar@2x.png';
-import candidatesPagePng from './drawn/candidates-page.png';
+import candidateCardPng from './drawn/candidate-card-list.png';
 
-type Level = 'Atoms' | 'Molecules' | 'Organisms' | 'Template';
+type Level = 'Atoms' | 'Molecules' | 'Organisms';
+
+interface Drawn {
+  src: string;
+  /** The component's box in Figma, which the selection outlines */
+  width: number;
+  height: number;
+  /** What it shows, for the image's alt text */
+  label: string;
+  /** When the export runs past the box (a shadow): its size and where the box sits in it */
+  render?: { width: number; height: number; left: number; top: number };
+}
 
 interface Item {
   key: ComponentKey;
   level: Level;
-  /** The drawing exported from Figma, at its size in Figma, and what it shows */
-  drawn: { src: string; width: number; height: number; label: string };
-  /** A screen is a Figma frame (blue selection); everything else is a component (purple) */
-  frame?: boolean;
+  drawn: Drawn;
   /** How the live one is written, shown above it */
   usage: string;
   /** Its docs page in Storybook */
@@ -32,14 +40,14 @@ interface Item {
 
 const items: Item[] = [
   { key: 'Button', level: 'Atoms', drawn: { src: buttonSvg, width: 130, height: 40, label: 'Add candidate' }, usage: '<Button variant="primary">', story: 'components-actions-button--docs', Live: LiveButton },
-  { key: 'Badge', level: 'Atoms', drawn: { src: badgeSvg, width: 54, height: 26, label: 'Hired' }, usage: '<Badge tone="success" size="m">', story: 'components-data-display-badge--docs', Live: LiveBadge },
-  { key: 'Tag', level: 'Atoms', drawn: { src: tagSvg, width: 85, height: 24, label: 'TypeScript' }, usage: '<Tag onClick={toggle}>', story: 'components-data-display-tag--docs', Live: LiveTag },
-  { key: 'Avatar', level: 'Atoms', drawn: { src: avatarSvg, width: 48, height: 48, label: 'LH' }, usage: '<Avatar size="l" name="Lena Horvat">', story: 'components-data-display-avatar--docs', Live: LiveAvatar },
+  { key: 'Tag', level: 'Atoms', drawn: { src: tagPng, width: 102.5, height: 24, label: 'TypeScript, removable' }, usage: '<Tag onRemove={remove}>', story: 'components-data-display-tag--docs', Live: LiveTag },
+  { key: 'Switch', level: 'Atoms', drawn: { src: switchPng, width: 124.5, height: 20, label: 'Blind review, on', render: { width: 124.5, height: 28, left: 0, top: 2 } }, usage: '<Switch label="Blind review">', story: 'components-forms-switch--docs', Live: LiveSwitch },
   { key: 'Avatar stack', level: 'Molecules', drawn: { src: avatarStackSvg, width: 148, height: 36, label: 'AK, LP, IM, JD and 3 more' }, usage: '<AvatarStack size="m" people={team}>', story: 'components-data-display-avatar-stack--docs', Live: LiveAvatarStack },
-  { key: 'Breadcrumbs', level: 'Molecules', drawn: { src: breadcrumbsPng, width: 309, height: 18, label: 'Jobs, Senior Frontend Developer, Mate Plate' }, usage: '<Breadcrumbs items={path}>', story: 'components-navigation-breadcrumbs--docs', Live: LiveBreadcrumbs },
-  { key: 'Candidate card', level: 'Organisms', drawn: { src: candidateCardPng, width: 320, height: 176, label: 'Mate Plate, a partial match' }, usage: '<CandidateCard type="board">', story: 'components-air-candidate-card--docs', Live: LiveCandidateCard, liveSize: { width: 320 } },
+  { key: 'Segmented control', level: 'Molecules', drawn: { src: segmentedPng, width: 181, height: 32, label: 'Board, List and Table, Board selected', render: { width: 185, height: 40, left: 4, top: 2 } }, usage: '<SegmentedControl segments={views}>', story: 'components-forms-segmented-control--docs', Live: LiveSegmentedControl },
+  { key: 'Select', level: 'Molecules', drawn: { src: selectPng, width: 320, height: 86, label: 'Job, required, Frontend Developer, with its helper' }, usage: '<Select label="Job" required>', story: 'components-forms-select--docs', Live: LiveSelect, liveSize: { width: 320 } },
+  { key: 'Menu', level: 'Organisms', drawn: { src: menuPng, width: 240, height: 179, label: 'Edit, Duplicate, Move to stage, Share and Delete', render: { width: 280, height: 219, left: 20, top: 12 } }, usage: '<Menu label="Candidate actions">', story: 'components-navigation-menu--docs', Live: LiveMenu },
   { key: 'Top bar', level: 'Organisms', drawn: { src: topBarPng, width: 1200, height: 56, label: 'breadcrumbs, search, help, notifications and the account' }, usage: '<TopBar breadcrumbs={…} search={…}>', story: 'components-navigation-top-bar--docs', Live: LiveTopBar, liveSize: { width: 1200, height: 56 } },
-  { key: 'Candidates page', level: 'Template', frame: true, drawn: { src: candidatesPagePng, width: 1440, height: 1024, label: 'the Candidates page' }, usage: '<CandidatesPage>', story: 'templates-candidates-page--docs', Live: LiveCandidatesPage, liveSize: { width: 1440, height: 1024 } },
+  { key: 'Candidate card', level: 'Organisms', drawn: { src: candidateCardPng, width: 1136, height: 646, label: 'Mate Plate, the full list card' }, usage: '<CandidateCard type="list">', story: 'components-air-candidate-card--docs', Live: LiveCandidateCard, liveSize: { width: 1136 } },
 ];
 
 const rows = Object.fromEntries(items.map((i) => [i.key, rowsFor(i.key)])) as Record<ComponentKey, Row[]>;
@@ -101,6 +109,17 @@ const variantLine = (name: string, short: boolean) =>
     .map((p) => (short ? p.split('=')[1] : p))
     .join(' · ');
 
+/** The Figma export, its box at the drawing's size; a shadow past the box shows outside it, as on the canvas */
+function Drawing({ drawn, alt }: { drawn: Drawn; alt: string }) {
+  const r = drawn.render;
+  if (!r) return <img src={drawn.src} width={drawn.width} height={drawn.height} alt={alt} />;
+  return (
+    <span className="ftc__drawing" style={{ width: drawn.width, height: drawn.height }}>
+      <img src={drawn.src} width={r.width} height={r.height} alt={alt} style={{ left: -r.left, top: -r.top }} />
+    </span>
+  );
+}
+
 /** A CSS declaration or a line of JSX, with the variables and component names picked out */
 function CodeLine({ row }: { row: Row }) {
   const text = row.kind === 'var' ? `${row.css.prop}: ${row.css.value};` : row.code;
@@ -123,7 +142,7 @@ function CodeLine({ row }: { row: Row }) {
 }
 
 function VarChips({ row }: { row: VarRow }) {
-  if (row.figma.textStyle) return <span className="ftc__chip">{row.figma.textStyle}</span>;
+  if (row.figma.style) return <span className="ftc__chip">{row.figma.style}</span>;
   return row.figma.tokens.map((t) => {
     const colour = swatch(t);
     return (
@@ -147,7 +166,7 @@ function PartChip({ row }: { row: PartRow }) {
 }
 
 /**
- * Figma to code: AIR's design system from atoms to a page template. Each step as drawn in Figma,
+ * Figma to code: AIR's design system from atoms to organisms. Each step as drawn in Figma,
  * with the parts it's built from and the variables bound to it, beside the real React component
  * and the line of code for each. Shown in an iframe on markofucek.com (Live components), served
  * at air.markofucek.com/figma-to-code/.
@@ -164,8 +183,10 @@ export function FigmaToCode() {
   const list = rows[item.key];
   const set = specs[item.key];
   const base = 'base' in set ? set.base : undefined;
-  const meta = base ? variantLine(base, false) : `Frame ${item.drawn.width} × ${item.drawn.height}`;
-  const metaShort = base ? variantLine(base, true) : `Frame ${item.drawn.width} × ${item.drawn.height}`;
+  // A component without variants (Menu, Segmented control) shows its size instead
+  const size = `${Math.round(item.drawn.width)} × ${Math.round(item.drawn.height)}`;
+  const meta = base ? variantLine(base, false) : size;
+  const metaShort = base ? variantLine(base, true) : size;
 
   const select = (i: number) => {
     setCurrent(i);
@@ -191,9 +212,9 @@ export function FigmaToCode() {
 
   return (
     <main className="ftc">
-      <h1 className="air-visually-hidden">Figma to code: AIR from atoms to a page template, in Figma and in React</h1>
+      <h1 className="air-visually-hidden">Figma to code: AIR from atoms to organisms, in Figma and in React</h1>
 
-      <div className="ftc__tabs" role="tablist" aria-label="Steps, from atoms to a template">
+      <div className="ftc__tabs" role="tablist" aria-label="Steps, from atoms to organisms">
         {items.map((it, i) => {
           const first = i === 0 || items[i - 1].level !== it.level;
           return (
@@ -238,14 +259,14 @@ export function FigmaToCode() {
           </div>
           <div ref={figmaCanvas} className={['ftc__canvas', 'ftc__canvas--figma', zoom.cropped && 'is-cropped'].filter(Boolean).join(' ')}>
             {zoom.zoom < 1 && <span className="ftc__zoom">{percent(zoom.zoom)}</span>}
-            <div className={['ftc__selected', item.frame && 'ftc__selected--frame'].filter(Boolean).join(' ')}>
+            <div className="ftc__selected">
               <p className="ftc__component" aria-hidden="true">
-                {!item.frame && <span className="ftc__mark" />}
-                {item.frame ? set.spec.n : item.key}
+                <span className="ftc__mark" />
+                {item.key}
               </p>
               <div className="ftc__selection">
                 <Fit key={item.key} box={figmaCanvas} width={item.drawn.width} height={item.drawn.height} onZoom={setZoom}>
-                  <img src={item.drawn.src} width={item.drawn.width} height={item.drawn.height} alt={`${item.key} as drawn in Figma: ${item.drawn.label}`} />
+                  <Drawing drawn={item.drawn} alt={`${item.key} as drawn in Figma: ${item.drawn.label}`} />
                 </Fit>
                 <span className="ftc__handle ftc__handle--tl" />
                 <span className="ftc__handle ftc__handle--tr" />

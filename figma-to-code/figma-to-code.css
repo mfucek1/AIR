@@ -13,8 +13,6 @@
   --ftc-match: rgb(0 95 125 / 0.11);
   --ftc-figma: #9747ff; /* Figma's component purple: outline, handles, mark */
   --ftc-figma-text: #8f3ff7; /* a shade darker for the 11 px name: 4.6:1 on paper */
-  --ftc-frame: #0d99ff; /* Figma's frame blue, for the template: outline and handles */
-  --ftc-frame-text: #0a6fb8; /* a shade darker for its 11 px name */
   --ftc-level: #646d78; /* flat/ink-3, the level names above the tabs */
   --ftc-sans: 'Inter Variable', Inter, system-ui, sans-serif;
   --ftc-mono: 'Roboto Mono', ui-monospace, Menlo, monospace;
@@ -40,7 +38,7 @@ body {
   min-height: 600px;
 }
 
-/* Tabs: one row, nine steps in four levels, each level named above its first tab (Figma: option A).
+/* Tabs: one row, nine steps in three levels, each level named above its first tab (Figma: option A).
    Ink underline on the current one; 20 apart, 32 between levels. */
 .ftc__tabs {
   display: flex;
@@ -205,18 +203,21 @@ body {
 }
 
 .ftc__fit {
-  overflow: hidden;
+  overflow: visible;
+}
+
+.ftc__drawing {
+  position: relative;
+  display: block;
+}
+
+.ftc__drawing > img {
+  position: absolute;
+  max-width: none;
 }
 
 .ftc__fit-inner {
   transform-origin: 0 0;
-}
-
-.ftc__page {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border: 0;
 }
 
 .ftc__fit-inner > img {
@@ -233,18 +234,12 @@ body {
   background: var(--ftc-white);
 }
 
-/* Figma's selection: the component's name above, a purple outline with four handles.
-   A screen is a frame: blue, and its name without the component mark. */
+/* Figma's selection: the component's name above, a purple outline with four handles */
 .ftc__selected {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 6px;
-}
-
-.ftc__selected--frame {
-  --ftc-figma: var(--ftc-frame);
-  --ftc-figma-text: var(--ftc-frame-text);
 }
 
 .ftc__component {
