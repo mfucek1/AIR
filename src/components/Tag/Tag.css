@@ -1,0 +1,56 @@
+/* Tag — Figma component set "Tag". */
+.air-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--air-space-4);
+  height: 24px;
+  padding: 0 var(--air-space-8);
+  /* Transparent border at rest so hover doesn't change the width (Figma adds the stroke on hover). */
+  border: var(--air-stroke-default) solid transparent;
+  border-radius: var(--air-radius-sm);
+  background: var(--air-tag-bg);
+  color: var(--air-tag-text);
+  font: var(--air-font-body-s);
+  letter-spacing: var(--air-tracking-body-s);
+  white-space: nowrap;
+}
+
+button.air-tag {
+  cursor: pointer;
+}
+
+button.air-tag:hover,
+.air-tag:has(.air-tag__remove:hover) {
+  border-color: var(--air-border-strong);
+}
+
+.air-tag--selected {
+  border-color: var(--air-border-selected);
+  background: var(--air-bg-selected);
+  color: var(--air-text-link);
+}
+
+button.air-tag--selected:hover {
+  border-color: var(--air-border-selected);
+}
+
+button.air-tag:focus-visible,
+.air-tag__remove:focus-visible {
+  outline: none;
+  box-shadow: var(--air-effect-focus-ring);
+}
+
+.air-tag__remove {
+  display: inline-flex;
+  margin: 0 calc(-1 * var(--air-space-4)) 0 0;
+  padding: 0;
+  border: none;
+  border-radius: var(--air-radius-xs);
+  background: none;
+  color: var(--air-icon-muted);
+  cursor: pointer;
+}
+
+.air-tag__remove:hover {
+  color: var(--air-icon-default);
+}

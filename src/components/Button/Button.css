@@ -1,0 +1,126 @@
+/* Button — maps 1:1 to the Figma component set "Button" (AIR, Components 2026). */
+.air-button {
+  --button-bg: transparent;
+  --button-bg-hover: var(--air-bg-hover);
+  --button-bg-pressed: var(--air-bg-pressed);
+  --button-fg: var(--air-text-link);
+  --button-icon: var(--air-icon-action);
+  --button-border: transparent;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--air-space-8);
+  height: var(--air-size-control-md);
+  padding: 0 var(--air-space-16);
+  border: none;
+  border-radius: var(--air-radius-sm);
+  background: var(--button-bg);
+  color: var(--button-fg);
+  font: var(--air-font-body-m-strong);
+  letter-spacing: var(--air-tracking-body-m-strong);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 100ms ease-out;
+}
+
+.air-button--s {
+  height: var(--air-size-control-sm);
+  padding: 0 var(--air-space-12);
+}
+
+.air-button__icon {
+  flex: none;
+  color: var(--button-icon);
+}
+
+.air-button:hover:not(:disabled) {
+  background: var(--button-bg-hover);
+}
+
+.air-button:active:not(:disabled) {
+  background: var(--button-bg-pressed);
+}
+
+.air-button:focus-visible {
+  outline: none;
+  box-shadow: var(--air-effect-focus-ring);
+}
+
+/* Types, default tone */
+.air-button--primary {
+  --button-bg: var(--air-action-primary);
+  --button-bg-hover: var(--air-action-primary-hover);
+  --button-bg-pressed: var(--air-action-primary-pressed);
+  --button-fg: var(--air-text-on-action);
+  --button-icon: var(--air-icon-inverse);
+}
+
+.air-button--secondary {
+  --button-bg: var(--air-action-secondary);
+  --button-bg-hover: var(--air-action-secondary-hover);
+  --button-bg-pressed: var(--air-action-secondary-pressed);
+  --button-fg: var(--air-text-primary);
+  --button-icon: var(--air-icon-default);
+  --button-border: var(--air-border-input);
+  border: var(--air-stroke-default) solid var(--button-border);
+}
+
+.air-button--subtle {
+  --button-bg: var(--air-action-subtle);
+  --button-bg-hover: var(--air-action-subtle-hover);
+  --button-bg-pressed: var(--air-action-subtle-pressed);
+}
+
+/* Ghost uses the base values: no fill, bg/hover and bg/pressed. */
+
+/* Danger tone */
+.air-button--danger {
+  --button-fg: var(--air-danger-text);
+  --button-icon: var(--air-danger-icon);
+}
+
+.air-button--danger.air-button--primary {
+  --button-bg: var(--air-action-danger);
+  --button-bg-hover: var(--air-action-danger-hover);
+  --button-bg-pressed: var(--air-action-danger-pressed);
+  --button-fg: var(--air-text-on-danger);
+  --button-icon: var(--air-icon-inverse);
+}
+
+.air-button--danger.air-button--secondary {
+  --button-bg: var(--air-action-secondary);
+  --button-bg-hover: var(--air-action-danger-subtle);
+  --button-bg-pressed: var(--air-action-danger-subtle-hover);
+  --button-border: var(--air-border-danger);
+}
+
+.air-button--danger.air-button--subtle {
+  --button-bg: var(--air-action-danger-subtle);
+  --button-bg-hover: var(--air-action-danger-subtle-hover);
+  --button-bg-pressed: var(--air-action-danger-subtle-pressed);
+}
+
+.air-button--danger.air-button--ghost {
+  --button-bg-hover: var(--air-action-danger-subtle);
+  --button-bg-pressed: var(--air-action-danger-subtle-hover);
+}
+
+/* Disabled: one look for every type and tone */
+.air-button:disabled {
+  --button-bg: var(--air-action-disabled);
+  --button-fg: var(--air-text-disabled);
+  --button-icon: var(--air-text-disabled);
+  --button-border: var(--air-border-subtle);
+  cursor: not-allowed;
+}
+
+.air-button--ghost:disabled {
+  --button-bg: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .air-button {
+    transition: none;
+  }
+}

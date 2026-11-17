@@ -1,0 +1,35 @@
+import { Meta, Unstyled } from '@storybook/addon-docs/blocks';
+import { PrimitiveRamps, RoleSwatches } from './Foundations';
+
+<Meta title="Foundations/Colour" />
+
+# Colour
+
+Two layers. **Primitives** are the raw ramps. **Roles** name a job, like `--air-action-primary`, and point to a primitive. Components only use roles, so a theme change happens in one place.
+
+- **Petrol** is the brand and the action colour.
+- **Apricot** is the accent, used sparingly.
+- **Violet** is reserved for AI.
+- **Slate** neutrals carry a little petrol, so greys sit well next to the brand.
+
+## Roles
+
+<Unstyled><RoleSwatches title="Backgrounds" prefix="--air-bg-" /></Unstyled>
+<Unstyled><RoleSwatches title="Text" prefix="--air-text-" /></Unstyled>
+<Unstyled><RoleSwatches title="Icons" prefix="--air-icon-" /></Unstyled>
+<Unstyled><RoleSwatches title="Borders" prefix="--air-border-" /></Unstyled>
+<Unstyled><RoleSwatches title="Actions" prefix="--air-action-" /></Unstyled>
+<Unstyled><RoleSwatches title="AI" prefix="--air-ai-" /></Unstyled>
+<Unstyled><RoleSwatches title="Info" prefix="--air-info-" /></Unstyled>
+<Unstyled><RoleSwatches title="Success" prefix="--air-success-" /></Unstyled>
+<Unstyled><RoleSwatches title="Warning" prefix="--air-warning-" /></Unstyled>
+<Unstyled><RoleSwatches title="Danger" prefix="--air-danger-" /></Unstyled>
+<Unstyled><RoleSwatches title="Tags" prefix="--air-tag-" /></Unstyled>
+<Unstyled><RoleSwatches title="Pipeline stages" prefix="--air-stage-" /></Unstyled>
+<Unstyled><RoleSwatches title="Navigation chrome" prefix="--air-chrome-" /></Unstyled>
+<Unstyled><RoleSwatches title="Charts" prefix="--air-chart-" /></Unstyled>
+<Unstyled><RoleSwatches title="Brand" prefix="--air-brand-" /></Unstyled>
+
+## Primitives
+
+<Unstyled><PrimitiveRamps /></Unstyled>

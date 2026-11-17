@@ -1,0 +1,47 @@
+/* Avatar — Figma component set "Avatar" (Initials, Icon, Image, Logo × S, M, L). */
+.air-avatar {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--air-size-avatar-md);
+  height: var(--air-size-avatar-md);
+  overflow: hidden;
+  border-radius: var(--air-radius-full);
+  background: var(--air-brand-paper-strong);
+  color: var(--air-brand-ink);
+  font: var(--air-font-body-m-strong);
+  letter-spacing: var(--air-tracking-body-m-strong);
+  user-select: none;
+}
+
+.air-avatar--s {
+  width: var(--air-size-avatar-sm);
+  height: var(--air-size-avatar-sm);
+  font: var(--air-font-caption-strong);
+  letter-spacing: var(--air-tracking-caption-strong);
+}
+
+.air-avatar--l {
+  width: var(--air-size-avatar-lg);
+  height: var(--air-size-avatar-lg);
+  font: var(--air-font-title-m);
+  letter-spacing: var(--air-tracking-title-m);
+}
+
+.air-avatar img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.air-avatar--image {
+  border: var(--air-stroke-default) solid var(--air-border-subtle);
+  background: var(--air-bg-surface);
+}
+
+.air-avatar--logo {
+  border-radius: var(--air-radius-sm);
+  background: var(--air-bg-surface);
+}

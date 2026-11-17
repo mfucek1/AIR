@@ -1,0 +1,46 @@
+/* Badge and Badge icon — Figma component sets "Badge" and "Badge icon". */
+.air-badge {
+  --badge-bg: var(--air-tag-bg);
+  --badge-border: var(--air-border-subtle);
+  --badge-fg: var(--air-tag-text);
+  --badge-solid: var(--air-tag-solid);
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--air-space-4);
+  padding: var(--air-space-2) var(--air-space-8);
+  border: var(--air-stroke-default) solid var(--badge-border);
+  border-radius: var(--air-radius-full);
+  background: var(--badge-bg);
+  color: var(--badge-fg);
+  font: var(--air-font-caption-strong);
+  letter-spacing: var(--air-tracking-caption-strong);
+  white-space: nowrap;
+}
+
+.air-badge--m {
+  font: var(--air-font-body-m-strong);
+  letter-spacing: var(--air-tracking-body-m-strong);
+}
+
+.air-badge__icon {
+  flex: none;
+}
+
+.air-badge--info { --badge-bg: var(--air-info-bg); --badge-border: var(--air-info-border); --badge-fg: var(--air-info-text); --badge-solid: var(--air-info-solid); }
+.air-badge--success { --badge-bg: var(--air-success-bg); --badge-border: var(--air-success-border); --badge-fg: var(--air-success-text); --badge-solid: var(--air-success-solid); }
+.air-badge--warning { --badge-bg: var(--air-warning-bg); --badge-border: var(--air-warning-border); --badge-fg: var(--air-warning-text); --badge-solid: var(--air-warning-solid); }
+.air-badge--danger { --badge-bg: var(--air-danger-bg); --badge-border: var(--air-danger-border); --badge-fg: var(--air-danger-text); --badge-solid: var(--air-danger-solid); }
+.air-badge--ai { --badge-bg: var(--air-ai-bg); --badge-border: var(--air-ai-border); --badge-fg: var(--air-ai-text); --badge-solid: var(--air-ai-solid); }
+
+/* Inverse: solid fill, no border */
+.air-badge--inverse {
+  border: none;
+  background: var(--badge-solid);
+  color: var(--air-text-inverse);
+}
+
+/* Icon only: 22 px (S) or 26 px (M) circle */
+.air-badge--icon-only {
+  padding: var(--air-space-4);
+}

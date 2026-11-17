@@ -1,0 +1,26 @@
+@import '@fontsource-variable/inter';
+@import '../tokens/tokens.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font: var(--air-font-body-m);
+  color: var(--air-text-primary);
+  background: var(--air-bg-surface);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Screen-reader-only text */
+.air-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
