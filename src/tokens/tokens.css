@@ -154,7 +154,7 @@
   --air-warning-icon: var(--air-amber-500);
   --air-danger-bg: var(--air-red-50);
   --air-danger-border: var(--air-red-200);
-  --air-danger-text: var(--air-red-600);
+  --air-danger-text: var(--air-red-700);
   --air-danger-icon: var(--air-red-600);
   --air-info-bg: var(--air-petrol-50);
   --air-info-border: var(--air-petrol-200);
