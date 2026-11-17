@@ -1,5 +1,6 @@
 /* Figma to code: the stage of the "Figma to code" card on markofucek.com (portfolio Figma,
-   "Component card · AIR · Figma to code", 1737:10910 at 1440 and 1737:11024 at 390). The page
+   "Component card · AIR · Figma to code", 1737:10910 at 1440 and 1737:11024 at 390; the nine
+   steps and their tab row from 🔮 Exploration, "simple to complex", option A). The page
    is the card's chrome, so it uses the portfolio's flat palette, not AIR's roles; the
    components inside it use AIR's tokens as everywhere else. */
 :root {
@@ -12,6 +13,9 @@
   --ftc-match: rgb(0 95 125 / 0.11);
   --ftc-figma: #9747ff; /* Figma's component purple: outline, handles, mark */
   --ftc-figma-text: #8f3ff7; /* a shade darker for the 11 px name: 4.6:1 on paper */
+  --ftc-frame: #0d99ff; /* Figma's frame blue, for the template: outline and handles */
+  --ftc-frame-text: #0a6fb8; /* a shade darker for its 11 px name */
+  --ftc-level: #646d78; /* flat/ink-3, the level names above the tabs */
   --ftc-sans: 'Inter Variable', Inter, system-ui, sans-serif;
   --ftc-mono: 'Roboto Mono', ui-monospace, Menlo, monospace;
 }
@@ -28,17 +32,20 @@ body {
   font-family: var(--ftc-sans);
 }
 
+/* The page fills the card's stage; the canvases take whatever height the rows leave */
 .ftc {
   display: flex;
   flex-direction: column;
-  min-height: 100%;
+  height: 100%;
+  min-height: 600px;
 }
 
-/* Tabs: ink underline on the current one, 24 apart */
+/* Tabs: one row, nine steps in four levels, each level named above its first tab (Figma: option A).
+   Ink underline on the current one; 20 apart, 32 between levels. */
 .ftc__tabs {
   display: flex;
   flex: none;
-  gap: 24px;
+  gap: 20px;
   padding: 0 24px;
   border-top: 1px solid var(--ftc-line);
   border-bottom: 1px solid var(--ftc-line);
@@ -47,17 +54,32 @@ body {
 }
 
 .ftc__tab {
+  position: relative;
   display: inline-flex;
   flex: none;
   flex-direction: column;
-  align-items: center;
-  padding: 13px 0;
+  align-items: flex-start;
+  padding: 26px 0 10px;
   border: 0;
   border-bottom: 2px solid transparent;
   background: none;
   color: var(--ftc-text-2);
   font: 500 14px/20px var(--ftc-sans);
   cursor: pointer;
+}
+
+.ftc__tab--first:not(:first-child) {
+  margin-left: 12px;
+}
+
+.ftc__level {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  color: var(--ftc-level);
+  font: 500 11px/14px var(--ftc-sans);
+  white-space: nowrap;
+  pointer-events: none;
 }
 
 /* Reserves the Semi Bold width, so the row doesn't shift when the tab changes */
@@ -90,6 +112,7 @@ body {
   display: grid;
   flex: 1;
   grid-template-columns: 1fr 1fr;
+  min-height: 0;
 }
 
 .ftc__pane {
@@ -97,6 +120,7 @@ body {
   flex-direction: column;
   gap: 20px;
   min-width: 0;
+  min-height: 0;
   padding: 24px 32px;
 }
 
@@ -146,14 +170,59 @@ body {
   display: none;
 }
 
-/* The canvases: 176 tall, the component in the middle */
+/* The canvases take the height the rows leave, the step in the middle. Steps wider than the
+   canvas are scaled down to fit, both sides alike, with the zoom in the corner as in Figma. */
 .ftc__canvas {
+  position: relative;
   display: flex;
-  flex: none;
+  flex: 1 1 0;
   align-items: center;
   justify-content: center;
-  height: 176px;
+  min-height: 96px;
+  overflow: hidden;
   border: 1px solid var(--ftc-line);
+}
+
+/* Zoomed to the width: the top of the page shows, the canvas cuts off the rest */
+.ftc__canvas.is-cropped {
+  align-items: flex-start;
+  padding-top: 16px;
+}
+
+.ftc__zoom {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  color: var(--ftc-text-2);
+  font: 500 11px/16px var(--ftc-sans);
+}
+
+.ftc__live {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 22px; /* the room the drawing's name takes on the left, so both sit alike */
+}
+
+.ftc__fit {
+  overflow: hidden;
+}
+
+.ftc__fit-inner {
+  transform-origin: 0 0;
+}
+
+.ftc__page {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.ftc__fit-inner > img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .ftc__canvas--figma {
@@ -164,12 +233,18 @@ body {
   background: var(--ftc-white);
 }
 
-/* Figma's selection: the component's name above, a purple outline with four handles */
+/* Figma's selection: the component's name above, a purple outline with four handles.
+   A screen is a frame: blue, and its name without the component mark. */
 .ftc__selected {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 6px;
+}
+
+.ftc__selected--frame {
+  --ftc-figma: var(--ftc-frame);
+  --ftc-figma-text: var(--ftc-frame-text);
 }
 
 .ftc__component {
@@ -305,6 +380,29 @@ body {
   color: var(--ftc-ink);
 }
 
+/* A part the step is built from: Figma's instance mark (an outlined diamond) and the name in purple */
+.ftc__chip--part {
+  gap: 6px;
+}
+
+.ftc__diamond {
+  flex: none;
+  width: 7px;
+  height: 7px;
+  margin: 0 2px;
+  border: 1.2px solid var(--ftc-figma);
+  transform: rotate(45deg);
+}
+
+.ftc__part-name {
+  color: var(--ftc-figma-text);
+}
+
+.ftc__part-props {
+  color: var(--ftc-text-2);
+  font-weight: 400;
+}
+
 /* Narrower: the variant as values only, no usage line */
 @media (max-width: 1099px) {
   .ftc__pane {
@@ -324,19 +422,23 @@ body {
   }
 }
 
-/* Phones and tablets: the panes stack, four rows each (the card's stage is 713 tall there) */
+/* Phones and tablets: the panes stack, four rows each (the card's stage is 860 tall there) */
 @media (max-width: 899px) {
   .ftc__tabs {
-    gap: 20px;
     padding: 0 16px;
   }
 
   .ftc__tab {
-    padding: 12px 0;
+    padding: 24px 0 8px;
+  }
+
+  .ftc__level {
+    top: 6px;
   }
 
   .ftc__panes {
     grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
   }
 
   .ftc__pane {
@@ -359,7 +461,7 @@ body {
   }
 
   .ftc__canvas {
-    height: 112px;
+    min-height: 72px;
   }
 
   .ftc__row {

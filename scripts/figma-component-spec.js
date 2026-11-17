@@ -1,5 +1,6 @@
 // Figma component spec extractor. Paste into a use_figma call on the AIR file.
-// Set SETS to component set ids or section ids (every set inside a section is read).
+// Set SETS to component set ids or section ids (every set inside a section is read), or to a
+// screen's frame id (read as one tree, like a template; its instances are listed, not opened).
 // Returns per set: props, description, the base variant's tree (layout, tokens, text styles,
 // icon tint) and, for variants one property away from the base, only what changes.
 // Keys: k type, n name, sz size, al layout (dir, gap, padding t/r/b/l, align), lz sizing
@@ -12,8 +13,13 @@ const SETS = ['9048:1210'];
 const BASE = {}; // e.g. { '9051:1490': 'Size=L, Type=Initials' }
 const COMPONENTS_PAGE = '9043:730';
 
-const page = await figma.getNodeByIdAsync(COMPONENTS_PAGE);
-await figma.setCurrentPageAsync(page);
+// Each root is read on its own page (screens live on other pages than the components).
+async function onPageOf(node) {
+  let p = node;
+  while (p.type !== 'PAGE') p = p.parent;
+  if (figma.currentPage !== p) await figma.setCurrentPageAsync(p);
+}
+await figma.setCurrentPageAsync(await figma.getNodeByIdAsync(COMPONENTS_PAGE));
 const TINT = 'VariableCollectionId:9044:734';
 const tintNames = { '9044:0': 'Default', '9044:1': 'Muted', '9044:2': 'Action', '9044:3': 'Inverse', '9049:0': 'AI', '9049:1': 'Danger', '9049:2': 'Success', '9049:3': 'Warning', '9049:4': 'Chrome', '9050:0': 'Disabled' };
 const vcache = {};
@@ -78,7 +84,9 @@ const props = (name) => Object.fromEntries(name.split(', ').map((s) => s.split('
 const result = {};
 for (const sid of SETS) {
   const root = await figma.getNodeByIdAsync(sid);
-  const sets = root.type === 'COMPONENT_SET' ? [root] : root.findAll((n) => n.type === 'COMPONENT_SET' || (n.type === 'COMPONENT' && n.parent.type !== 'COMPONENT_SET'));
+  await onPageOf(root);
+  const isScreen = root.type === 'FRAME' && !root.findOne((n) => n.type === 'COMPONENT_SET');
+  const sets = ['COMPONENT_SET', 'COMPONENT'].includes(root.type) || isScreen ? [root] : root.findAll((n) => n.type === 'COMPONENT_SET' || (n.type === 'COMPONENT' && n.parent.type !== 'COMPONENT_SET'));
   for (const set of sets) {
     const r = { id: set.id };
     if (set.description) r.desc = set.description;

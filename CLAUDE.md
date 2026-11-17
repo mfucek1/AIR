@@ -16,12 +16,16 @@ Storybook of AIR's components (an ATS), built in code from the AIR Figma file. L
 - Icon colours in code follow the Icon tint mode set on each variant (for example Menu item: Muted at rest, Default on hover, Action for the check).
 - Where Figma sets the AIR · Color mode to Dark on a layer inside a light component, code puts `data-theme="dark"` on that element (Toast inverse, the active Nav item icon, the Trial card's days bar and button, the Sidebar footer).
 - Focus: most controls have a "Focus ring" boolean (a hidden 2 px border/focus layer); fields use State=Focus. In code it's `:focus-visible` with `box-shadow: var(--air-effect-focus-ring)`.
-- `scripts/figma-component-spec.js`: paste into a `use_figma` call (set `SETS` to component set or section ids) to get each set's props, the base variant's layout, tokens, size variables and text styles, and what changes per variant. `BASE` reads another variant as the base (by set id).
+- `scripts/figma-component-spec.js`: paste into a `use_figma` call (set `SETS` to component set, component or section ids, or a screen's frame id) to get each set's props, the base variant's layout, tokens, size variables and text styles, and what changes per variant. `BASE` reads another variant as the base (by set id). A screen is read as one tree, with its instances listed (`is`), not opened; each root is read on its own page.
 
 ## Figma to code page
 - `figma-to-code/`: a small Vite page, not a story. `npm run build` builds it into `storybook-static/figma-to-code/`, so it deploys with Storybook to air.markofucek.com/figma-to-code/. markofucek.com shows it in an iframe under Live components (design: the portfolio Figma file, "Component card · AIR · Figma to code", at 1440 and 390).
-- Tabs Button, Badge, Tag, Avatar. Left: the variant exported from Figma (`drawn/*.svg`) and the variables bound to it (`figma-spec.ts`, the spec script's output with the `SETS` and `BASE` noted there). Right: the real component and, per variable, the CSS line from its stylesheet (`rows.ts` reads the `.css` files as text and throws if a line doesn't use the variable Figma binds).
-- Stage sizes: 680 tall side by side from 900 px wide; stacked under 900, four rows a side, 713 tall. The page's chrome uses the portfolio's flat palette; the components use AIR's tokens.
+- Nine steps, simple to complex, one tab each, the level named above its group (Figma: portfolio 🔮 Exploration, "simple to complex", option A): atoms Button, Badge, Tag, Avatar; molecules Avatar stack, Breadcrumbs; organisms Candidate card, Top bar; template Candidates page.
+- Left: the step as drawn in Figma (`drawn/`) and its rows from `figma-spec.ts` (the spec script's output, with the `SETS` and `BASE` noted there). Right: the real component (`live.tsx`) and the line of code for each row. Two kinds of row, both checked when the page loads (`rows.ts` throws on a mismatch):
+  - a variable bound in Figma beside the declaration in the component's stylesheet that uses it;
+  - from molecules up, first the parts it's built from (Figma instances, purple diamonds) beside the JSX line that places each, read from the component's source, the template, or `live.tsx` when the part fills a slot.
+- Wide steps render at their Figma width and are scaled down to fit, both sides alike, with the zoom in the corner; on narrow screens a page fits the width and the canvas crops its bottom. The template runs live as its own Storybook story in an iframe (1440 wide), so its landmarks stay its own.
+- Stage sizes: 680 tall side by side from 900 px wide; stacked under 900, four rows a side, 860 tall on the card. The canvases take whatever height the rows leave. The page's chrome uses the portfolio's flat palette; the components use AIR's tokens.
 - `npm run figma-to-code` serves it on port 6008 while editing.
 
 ## Tokens
@@ -30,6 +34,7 @@ Storybook of AIR's components (an ATS), built in code from the AIR Figma file. L
 ## Code
 - React 19, TypeScript, Vite, Storybook 10 (docs, a11y, pseudo-states add-ons), Inter (Fontsource), Lucide icons.
 - One folder per component in `src/components/<Name>/`: `<Name>.tsx`, `<Name>.css`, `<Name>.stories.tsx`. Export from `src/index.ts`.
+- Templates (a Refresh 2026 screen built only from organisms) in `src/templates/<Name>/`, stories titled `Templates/<Name>`. Figma draws screens at 1440 only, so a template keeps that layout on narrow screens and scrolls sideways.
 - Props mirror the Figma properties (Type → `variant`, Size → `size`, Tone → `tone`). Icons 20 px at M, 16 px at S unless Figma says otherwise.
 - Stories: title `Components/<Group>/<Name>`; groups in order Actions, Forms, Navigation, Feedback, Data display, Layout, AIR (`.storybook/preview.ts`). Each interactive component has an "All states" story built with `src/stories/StateGrid.tsx`; hover, pressed and focus come from storybook-addon-pseudo-states via the classes `.is-hover`, `.is-pressed`, `.is-focus` (see `src/stories/states.ts`).
 - Commands: `npm run storybook`, `npm run build` (to `storybook-static`), `npm run typecheck`, `npm run lint`.
@@ -39,7 +44,7 @@ Storybook of AIR's components (an ATS), built in code from the AIR Figma file. L
 2. `npm run build`.
 3. Accessibility: `scripts/a11y-check.mjs` runs axe on every story of the build (setup in the file). The only accepted hit is helper text under disabled fields (WCAG 1.4.3 exempts inactive components; field stories exclude disabled fields from Storybook's own check).
 4. Look at screenshots of every new or changed story, at desktop and phone widths.
-5. If `figma-to-code/` or a component it shows changed: axe and a look at every tab at 1198 × 680 and 356 × 713.
+5. If `figma-to-code/` or a component it shows changed: axe and a look at every tab at 1198 × 680 and 356 × 860 (and 356 × 713 until the portfolio card's phone stage is 860 on live).
 
 ## Deploy
 - Cloudflare Pages builds main to production (air.markofucek.com) and every other branch to `https://<branch>.air-8b2.pages.dev`.
@@ -51,6 +56,7 @@ Storybook of AIR's components (an ATS), built in code from the AIR Figma file. L
 - Video pre-screening: Video thumbnail, Video player, Reaction icon, Reaction chip, Recorder control, Score input, Question item.
 
 ## Open in Figma
+- Candidate card: Figma's card overrides the Match grade text to "Partial · 5/8"; the Match grade component (and code) says "Partial match", with the count after it. The Candidates screen also overrides the List card's buttons to Size=S and shows a 2-decimal rating (4.29); code uses the component's M buttons and Rating's one decimal.
 - Parked in Figma, so not built: Top bar Type=Chrome (the dark full-width bar) and Page header Type=Profile.
 - Pre-screening review versions 2A–2E (Refresh 2026, section `9615:61808`) repeat hand-built frames: Team rating, Score bars / Score per answer, the AI summary cell, Questionnaire summary. Make them components once Marko confirms 2A.
 - Section 6 has two "Jobs > Job details" screens and one "Jobs > Candidates" screen without the "Before ·" prefix; they use the 2023 library and a deleted Tag component.

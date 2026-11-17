@@ -60,3 +60,6 @@ export { CitationChip, CriteriaEvidenceRow, FlagRow, type CitationChipProps, typ
 export { AIBlock, type AIBlockProps } from './components/AIBlock/AIBlock';
 export { DecisionBar, type DecisionBarProps } from './components/DecisionBar/DecisionBar';
 export { CandidateCard, type CandidateCardProps } from './components/CandidateCard/CandidateCard';
+
+// Templates
+export { CandidatesPage, CandidatesTopBar } from './templates/CandidatesPage/CandidatesPage';

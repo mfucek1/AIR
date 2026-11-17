@@ -140,3 +140,104 @@
   color: var(--air-text-secondary);
   font: var(--air-font-body-m);
 }
+
+/* List: the rest of the Figma card — details, skill groups, experience, other jobs, documents
+   and contact. Rows of groups sit 32 apart; each group's label is Body/M Strong, 8 above its content. */
+.air-candidate__details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--air-space-32);
+  margin: 0;
+}
+
+.air-candidate__details div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--air-space-4);
+}
+
+.air-candidate__details dd {
+  margin: 0;
+  font: var(--air-font-body-m);
+}
+
+.air-candidate__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--air-space-32);
+}
+
+.air-candidate__row--ends {
+  justify-content: space-between;
+}
+
+.air-candidate__group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--air-space-8);
+}
+
+.air-candidate__group--end {
+  align-items: flex-end;
+}
+
+.air-candidate__group-label {
+  margin: 0;
+  color: var(--air-text-primary);
+  font: var(--air-font-body-m-strong);
+  letter-spacing: var(--air-tracking-body-m-strong);
+}
+
+.air-candidate__experience {
+  display: flex;
+  align-items: center;
+  gap: var(--air-space-12);
+}
+
+.air-candidate__experience-text,
+.air-candidate__applied li {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--air-space-2);
+  font: var(--air-font-body-m);
+}
+
+.air-candidate__date {
+  color: var(--air-text-muted);
+  font: var(--air-font-caption);
+}
+
+/* Icon tint Muted. */
+.air-candidate__quote {
+  display: flex;
+  align-items: center;
+  gap: var(--air-space-8);
+  margin: 0;
+  font: var(--air-font-body-m);
+}
+
+.air-candidate__quote-icon {
+  flex: none;
+  color: var(--air-icon-muted);
+}
+
+.air-candidate__applied,
+.air-candidate__files {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--air-space-32);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.air-candidate__files {
+  gap: var(--air-space-24);
+}
+
+.air-candidate__contact {
+  display: flex;
+  gap: var(--air-space-4);
+}
