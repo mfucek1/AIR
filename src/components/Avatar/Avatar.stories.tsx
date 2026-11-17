@@ -16,7 +16,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Playground: Story = {};
 
-const row = { display: 'flex', gap: 16, alignItems: 'center' } as const;
+const row = { display: 'flex', flexWrap: 'wrap', gap: 16, alignItems: 'center' } as const;
 
 export const Types: Story = {
   render: () => (

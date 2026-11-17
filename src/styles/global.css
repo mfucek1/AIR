@@ -24,3 +24,8 @@ body {
   clip-path: inset(50%);
   white-space: nowrap;
 }
+
+/* Storybook docs: long titles wrap on phones; the default line-height lets the lines overlap. */
+#storybook-docs h1 {
+  line-height: 1.15;
+}

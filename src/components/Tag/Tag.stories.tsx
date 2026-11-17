@@ -16,7 +16,7 @@ export const Playground: Story = {};
 export const States: Story = {
   parameters: { pseudo: { hover: ['.is-hover'], focusVisible: ['.is-focus'] } },
   render: () => (
-    <div style={{ display: 'flex', gap: 8 }}>
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
       <Tag onClick={() => {}}>Default</Tag>
       <Tag onClick={() => {}} className="is-hover">Hover</Tag>
       <Tag onClick={() => {}} selected>Selected</Tag>
@@ -32,7 +32,7 @@ export const AsFilters: Story = {
     const skills = ['React', 'TypeScript', 'Figma', 'Node.js', 'GraphQL'];
     const [on, setOn] = useState<string[]>(['React']);
     return (
-      <div style={{ display: 'flex', gap: 8 }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
         {skills.map((s) => (
           <Tag key={s} selected={on.includes(s)} onClick={() => setOn(on.includes(s) ? on.filter((x) => x !== s) : [...on, s])}>
             {s}
@@ -47,7 +47,7 @@ export const Removable: Story = {
   render: function Render() {
     const [tags, setTags] = useState(['React', 'TypeScript', 'Design systems']);
     return (
-      <div style={{ display: 'flex', gap: 8 }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
         {tags.map((t) => (
           <Tag key={t} onRemove={() => setTags(tags.filter((x) => x !== t))}>
             {t}

@@ -20,7 +20,7 @@ export const Playground: Story = {};
 
 export const Types: Story = {
   render: (args) => (
-    <div style={{ display: 'flex', gap: 16 }}>
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16 }}>
       <Button {...args} variant="primary">Primary</Button>
       <Button {...args} variant="secondary">Secondary</Button>
       <Button {...args} variant="subtle">Subtle</Button>
@@ -32,7 +32,7 @@ export const Types: Story = {
 export const Danger: Story = {
   args: { tone: 'danger' },
   render: (args) => (
-    <div style={{ display: 'flex', gap: 16 }}>
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16 }}>
       <Button {...args} variant="primary" leadingIcon={Trash2}>Delete job</Button>
       <Button {...args} variant="secondary">Decline</Button>
       <Button {...args} variant="subtle">Withdraw</Button>
@@ -45,12 +45,12 @@ export const SizesAndIcons: Story = {
   name: 'Sizes and icons',
   render: (args) => (
     <div style={{ display: 'grid', gap: 16, justifyItems: 'start' }}>
-      <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, alignItems: 'center' }}>
         <Button {...args} leadingIcon={UserPlus}>Add candidate</Button>
         <Button {...args} variant="secondary" trailingIcon={ChevronDown}>Export</Button>
         <Button {...args} variant="subtle" leadingIcon={Plus}>New job</Button>
       </div>
-      <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, alignItems: 'center' }}>
         <Button {...args} size="s" leadingIcon={UserPlus}>Add candidate</Button>
         <Button {...args} size="s" variant="secondary" trailingIcon={ChevronDown}>Export</Button>
         <Button {...args} size="s" variant="subtle" leadingIcon={Plus}>New job</Button>

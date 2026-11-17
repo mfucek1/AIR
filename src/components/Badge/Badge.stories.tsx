@@ -26,7 +26,7 @@ export const Tones: Story = {
   render: (args) => (
     <div style={{ display: 'grid', gap: 12 }}>
       {[false, true].map((inverse) => (
-        <div key={String(inverse)} style={{ display: 'flex', gap: 8 }}>
+        <div key={String(inverse)} style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
           {tones.map((tone) => (
             <Badge key={tone} {...args} tone={tone} inverse={inverse} showIcon>
               {sample[tone]}
@@ -40,7 +40,7 @@ export const Tones: Story = {
 
 export const Sizes: Story = {
   render: (args) => (
-    <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
       <Badge {...args} size="s" showIcon>Small</Badge>
       <Badge {...args} size="m" showIcon>Medium</Badge>
     </div>
@@ -53,7 +53,7 @@ export const IconOnly: Story = {
   render: () => (
     <div style={{ display: 'grid', gap: 12 }}>
       {(['s', 'm'] as const).map((size) => (
-        <div key={size} style={{ display: 'flex', gap: 8 }}>
+        <div key={size} style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
           {tones.map((tone) => (
             <BadgeIcon key={tone} tone={tone} size={size} label={sample[tone]} />
           ))}
